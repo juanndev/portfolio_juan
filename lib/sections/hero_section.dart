@@ -73,10 +73,8 @@ class HeroSection extends StatelessWidget {
   Widget _buildDownloadButton() {
     return OutlinedButton(
       onPressed: () {
-        // 1. Pegamos o idioma atual do nosso ValueNotifier
         final String currentLang = appLanguage.value;
 
-        // 2. Definimos qual arquivo e qual nome de download usar
         String filePath;
         String fileName;
 
@@ -96,7 +94,6 @@ class HeroSection extends StatelessWidget {
             break;
         }
 
-        // 3. Executamos o download disparando o link HTML
         html.AnchorElement(href: filePath)
           ..setAttribute('download', fileName)
           ..click();
@@ -110,7 +107,7 @@ class HeroSection extends StatelessWidget {
         ),
       ),
       child: Text(
-        AppTranslations.get('hero_btn'), // O texto do botão também já traduz!
+        AppTranslations.get('hero_btn'), 
         style: GoogleFonts.inter(
           fontSize: 15,
           fontWeight: FontWeight.w500,

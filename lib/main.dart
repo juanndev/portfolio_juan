@@ -140,11 +140,11 @@ class _HomePageState extends State<HomePage> {
                 ],
                 
                 IconButton(
-                  onPressed: () => _launchUrl('https://github.com/juanmota'), 
+                  onPressed: () => _launchUrl('https://github.com/juanndev'), 
                   icon: const FaIcon(FontAwesomeIcons.github, color: Colors.white, size: 20),
                 ),
                 IconButton(
-                  onPressed: () => _launchUrl('https://linkedin.com/in/juanmota'), 
+                  onPressed: () => _launchUrl('https://www.linkedin.com/in/juanndev/'), 
                   icon: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.white, size: 20),
                 ),
                 const SizedBox(width: 8),
