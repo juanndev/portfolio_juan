@@ -10,10 +10,8 @@ class ExperienceSection extends StatefulWidget {
 }
 
 class _ExperienceSectionState extends State<ExperienceSection> {
-  // Variável que guarda qual aba está ativa no momento (0 é a primeira)
   int _selectedIndex = 0;
 
-  // Lista com os dados de cada experiência (fácil de editar depois!)
   final List<Map<String, String>> experiences = [
     {
       "menuTitle": AppTranslations.get('exp_1_menu'),
@@ -131,7 +129,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
           return InkWell(
             onTap: () {
               setState(() {
-                _selectedIndex = index; // Atualiza a tela com o novo índice
+                _selectedIndex = index;
               });
             },
             child: Container(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// O 'controle remoto' do idioma. Começa em português.
 final ValueNotifier<String> appLanguage = ValueNotifier<String>('pt');
 
 class AppTranslations {

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// Imports das suas seções
 import 'sections/hero_section.dart';
 import 'sections/about_section.dart';
 import 'sections/experience_section.dart';
@@ -12,7 +11,6 @@ import 'sections/projects_section.dart';
 import 'sections/services_section.dart';
 import 'sections/footer_section.dart';
 
-// IMPORTANTE: Import do nosso dicionário
 import 'core/app_translations.dart';
 
 void main() {
@@ -68,15 +66,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // O SEGREDO: Colocamos o Builder aqui dentro! 
-    // Sempre que appLanguage mudar, ele reconstrói a Scaffold inteira.
+
     return ValueListenableBuilder<String>(
       valueListenable: appLanguage,
       builder: (context, idiomaAtual, child) {
         return Scaffold(
           body: Stack(
             children: [
-              // Camada 1: O conteúdo do site
               SingleChildScrollView(
                 child: Column(
                   children: [
@@ -152,13 +148,11 @@ class _HomePageState extends State<HomePage> {
                 Container(width: 4, height: 4, decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle)),
                 const SizedBox(width: 16),
                 
-                // SELETOR DE IDIOMAS
                 PopupMenuButton<String>(
                   color: const Color(0xFF131C18),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   offset: const Offset(0, 40),
                   
-                  // Mostra a bandeira atual baseada no ValueNotifier
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
@@ -179,7 +173,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   
                   onSelected: (String novoIdioma) {
-                    // ATENÇÃO: Isso aqui deve disparar o rebuild automático agora!
                     appLanguage.value = novoIdioma;
                   },
                   

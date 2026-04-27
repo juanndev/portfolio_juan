@@ -41,7 +41,7 @@ class FooterSection extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
                   side: BorderSide(color: Colors.white.withOpacity(0.1)),
-                  backgroundColor: const Color(0xFF0B1911), // Fundo sutil
+                  backgroundColor: const Color(0xFF0B1911), 
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
