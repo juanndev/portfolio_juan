@@ -21,8 +21,8 @@ class ProjectsSection extends StatelessWidget {
         "title": AppTranslations.get('proj_1_title'),
         "description": AppTranslations.get('proj_1_desc'),
         "techs": AppTranslations.get('proj_1_techs'),
-        "imagePath": "assets/images/tapdano.jpg", 
-        "github": "https://github.com/seu_usuario",
+        "imagePath": "assets/images/portfolio.jpg", 
+        "github": "https://github.com/juanndev/portfolio_juan",
         //"deploy": "",
       },
       {
