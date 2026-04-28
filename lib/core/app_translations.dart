@@ -65,9 +65,9 @@ class AppTranslations {
       'proj_title': 'Projetos',
       'proj_subtitle': '*Passe para o lado para ver os projetos*',
       
-      'proj_1_title': 'TapDano',
-      'proj_1_desc': 'Como parte da equipe da Blueshift, fui designado a codar o site da TapDano a partir de um design já criado.',
-      'proj_1_techs': 'React • TypeScript',
+      'proj_1_title': 'Meu Portfólio',
+      'proj_1_desc': 'Meu portfólio pessoal desenvolvido com Flutter Web. O projeto possui internacionalização dinâmica (PT, EN, ES), responsividade avançada e um design moderno focado em UI/UX.',
+      'proj_1_techs': 'Flutter • Dart',
       
       'proj_2_title': 'Sistema de Reserva de Hotéis',
       'proj_2_desc': 'Plataforma multipáginas de reserva de hotéis com Bootstrap 5 e jQuery. Foco em arquitetura CSS modular e responsividade.',
@@ -142,17 +142,17 @@ class AppTranslations {
       'proj_title': 'Projects',
       'proj_subtitle': '*Swipe sideways to see the projects*',
       
-      'proj_1_title': 'TapDano',
-      'proj_1_desc': 'As part of the Blueshift team, I was assigned to code the TapDano website based on an already created design.',
-      'proj_1_techs': 'React • TypeScript',
+      'proj_1_title': 'My Portfolio',
+      'proj_1_desc': 'My personal portfolio developed with Flutter Web. The project features dynamic internationalization (PT, EN, ES), advanced responsiveness, and a modern design focused on UI/UX.',
+      'proj_1_techs': 'Flutter • Dart',
       
-      'proj_2_title': 'WattWise',
-      'proj_2_desc': 'Energy dashboard, a project created for FIAP\'s Global Solution in the second semester of the first year.',
-      'proj_2_techs': 'NextJs • TypeScript • Tailwind CSS',
+      'proj_2_title': 'Hotel Reservation System',
+      'proj_2_desc': 'Multi-page hotel booking platform using Bootstrap 5 and jQuery. Focus on modular CSS architecture and responsiveness.',
+      'proj_2_techs': 'HTML5 • CSS3 • Javascript',
       
-      'proj_3_title': 'BikeHub',
-      'proj_3_desc': 'Fictional e-commerce for a bicycle shop. Its initial idea was based on prospecting a real client.',
-      'proj_3_techs': 'HTML • CSS • JavaScript',
+      'proj_3_title': 'Food Commerce - Delivery Platform',
+      'proj_3_desc': 'Online ordering platform powered by React and TS. Focus on state management, dynamic filters, and a mobile-first experience.',
+      'proj_3_techs': 'React • Typescript • Styled Components',
       
       'proj_btn_github': 'Github',
       'proj_btn_deploy': 'Deploy',
@@ -219,17 +219,17 @@ class AppTranslations {
       'proj_title': 'Proyectos',
       'proj_subtitle': '*Desliza hacia los lados para ver los proyectos*',
       
-      'proj_1_title': 'TapDano',
-      'proj_1_desc': 'Como parte del equipo de Blueshift, fui asignado para codificar el sitio web de TapDano a partir de un diseño ya creado.',
+      'proj_1_title': 'Mi Portafolio',
+      'proj_1_desc': 'Mi portafolio personal desarrollado con Flutter Web. El proyecto cuenta con internacionalización dinámica (PT, EN, ES), diseño responsivo avanzado y una interfaz moderna enfocada en UI/UX.',
       'proj_1_techs': 'React • TypeScript',
       
-      'proj_2_title': 'WattWise',
-      'proj_2_desc': 'Dashboard de energía, proyecto creado para la Global Solution de FIAP, en el segundo semestre del primer año.',
-      'proj_2_techs': 'NextJs • TypeScript • Tailwind CSS',
+      'proj_2_title': 'Sistema de reservas de hotel',
+      'proj_2_desc': 'Plataforma de reservas de hotel multipágina que utiliza Bootstrap 5 y jQuery. Se centra en la arquitectura CSS modular y la adaptabilidad a diferentes dispositivos.',
+      'proj_2_techs': 'HTML5 • CSS3 • Javascript',
       
-      'proj_3_title': 'BikeHub',
-      'proj_3_desc': 'E-commerce ficticio de una tienda de bicicletas. Su idea inicial se baseaba en la prospección de un cliente real.',
-      'proj_3_techs': 'HTML • CSS • JavaScript',
+      'proj_3_title': 'Plataforma de reparto de alimentos',
+      'proj_3_desc': 'Plataforma de pedidos en línea desarrollada con React y TS. Se centra en la gestión del estado, filtros dinámicos y una experiencia optimizada para dispositivos móviles.',
+      'proj_3_techs': 'React • Typescript • Styled Components',
       
       'proj_btn_github': 'Github',
       'proj_btn_deploy': 'Deploy',
