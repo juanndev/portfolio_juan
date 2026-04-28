@@ -70,6 +70,8 @@ flutter:
     - assets/files/curriculo_pt.pdf
     - assets/files/resume_en.pdf
     - assets/files/curriculum_es.pdf
+    
+    - assets/images/Plataforma de Delivery.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
