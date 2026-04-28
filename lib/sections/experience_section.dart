@@ -12,7 +12,7 @@ class ExperienceSection extends StatefulWidget {
 class _ExperienceSectionState extends State<ExperienceSection> {
   int _selectedIndex = 0;
 
-  final List<Map<String, String>> experiences = [
+  List<Map<String, String>> get experiences => [
     {
       "menuTitle": AppTranslations.get('exp_1_menu'),
       "role": AppTranslations.get('exp_1_role'),
@@ -47,7 +47,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFF0B1610), // Background da seção
+      color: const Color(0xFF0B1610),
       padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
       child: Center(
         child: Container(
@@ -55,7 +55,6 @@ class _ExperienceSectionState extends State<ExperienceSection> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Título da Seção
               Row(
                 children: [
                   Text(
@@ -77,8 +76,6 @@ class _ExperienceSectionState extends State<ExperienceSection> {
                 ],
               ),
               const SizedBox(height: 60),
-
-              // Layout Responsivo: Lado a Lado (PC) ou Empilhado (Mobile)
               LayoutBuilder(
                 builder: (context, constraints) {
                   bool isDesktop = constraints.maxWidth > 800;
@@ -87,10 +84,8 @@ class _ExperienceSectionState extends State<ExperienceSection> {
                     return Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Menu lateral esquerdo
                         _buildLeftMenu(),
                         const SizedBox(width: 60),
-                        // Conteúdo da direita
                         Expanded(child: _buildRightContent()),
                       ],
                     );
@@ -113,12 +108,11 @@ class _ExperienceSectionState extends State<ExperienceSection> {
     );
   }
 
-  // Constrói o menu das empresas
   Widget _buildLeftMenu({bool isMobile = false}) {
     return Container(
       width: isMobile ? double.infinity : 280,
       decoration: BoxDecoration(
-        color: const Color(0xFF040615), // Cor levemente mais escura/azulada do menu
+        color: const Color(0xFF040615),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Column(
@@ -136,7 +130,6 @@ class _ExperienceSectionState extends State<ExperienceSection> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
               decoration: BoxDecoration(
-                // Linha verde lateral apenas no item selecionado
                 border: Border(
                   left: BorderSide(
                     color: isSelected ? const Color(0xFF2ECC71) : Colors.transparent,
@@ -160,7 +153,6 @@ class _ExperienceSectionState extends State<ExperienceSection> {
     );
   }
 
-  // Constrói o texto detalhado da empresa selecionada
   Widget _buildRightContent() {
     final activeData = experiences[_selectedIndex];
 
@@ -191,7 +183,6 @@ class _ExperienceSectionState extends State<ExperienceSection> {
           ],
         ),
         const SizedBox(height: 12),
-        // Nome da Empresa em verde
         Text(
           activeData["company"]!,
           style: GoogleFonts.inter(
@@ -201,13 +192,12 @@ class _ExperienceSectionState extends State<ExperienceSection> {
           ),
         ),
         const SizedBox(height: 24),
-        // Descrição
         Text(
           activeData["description"]!,
           style: GoogleFonts.inter(
             color: const Color(0xFFA0AEC0),
             fontSize: 16,
-            height: 1.6, // Espaçamento entre linhas (line-height)
+            height: 1.6,
             fontWeight: FontWeight.w300,
           ),
         ),

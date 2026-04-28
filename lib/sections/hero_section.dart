@@ -122,15 +122,18 @@ class HeroSection extends StatelessWidget {
       children: [
         SvgPicture.asset('assets/icons/javascriptIcon.svg', height: 24),
         const SizedBox(width: 24),
-        SvgPicture.asset('assets/icons/reactIcon.svg', height: 24),
+        SvgPicture.asset('assets/icons/flutterIcon.svg', height: 24),
         const SizedBox(width: 24),
-        SvgPicture.asset('assets/icons/nextjsIcon.svg', height: 24),
+        SvgPicture.asset('assets/icons/dartIcon.svg', height: 24),
+        const SizedBox(width: 24),
+        SvgPicture.asset('assets/icons/typescriptIcon.svg', height: 24),
         const SizedBox(width: 24),
         SvgPicture.asset('assets/icons/sassIcon.svg', height: 24),
         const SizedBox(width: 24),
-        SvgPicture.asset('assets/icons/tailwindIcon.svg', height: 24),
+        SvgPicture.asset('assets/icons/cursorIcon.svg', height: 24),
         const SizedBox(width: 24),
         SvgPicture.asset('assets/icons/figmaIcon.svg', height: 24),
+        const SizedBox(width: 24),
       ],
     );
   }
