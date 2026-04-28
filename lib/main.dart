@@ -42,6 +42,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(); 
+  
   final GlobalKey _heroKey = GlobalKey();
   final GlobalKey _aboutKey = GlobalKey();
   final GlobalKey _projectsKey = GlobalKey();
@@ -66,11 +68,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return ValueListenableBuilder<String>(
       valueListenable: appLanguage,
       builder: (context, idiomaAtual, child) {
         return Scaffold(
+          key: _scaffoldKey,
+          drawer: _buildMobileDrawer(context),
           body: Stack(
             children: [
               SingleChildScrollView(
@@ -96,6 +99,46 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         );
+      },
+    );
+  }
+
+  Widget _buildMobileDrawer(BuildContext context) {
+    return Drawer(
+      backgroundColor: const Color(0xFF03120A),
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+        children: [
+          Align(
+            alignment: Alignment.centerRight,
+            child: IconButton(
+              icon: const Icon(Icons.close, color: Colors.white, size: 28),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+          const SizedBox(height: 40),
+          _buildDrawerItem(AppTranslations.get('nav_projects'), _projectsKey),
+          _buildDrawerItem(AppTranslations.get('nav_about'), _aboutKey),
+          _buildDrawerItem(AppTranslations.get('nav_contact'), _contactKey),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDrawerItem(String text, GlobalKey key) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        text,
+        style: GoogleFonts.inter(
+          color: Colors.white.withOpacity(0.9),
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      onTap: () {
+        Navigator.pop(context); 
+        _scrollTo(key); 
       },
     );
   }
@@ -130,7 +173,8 @@ class _HomePageState extends State<HomePage> {
                 ] else ...[
                   IconButton(
                     icon: const Icon(Icons.menu, color: Colors.white),
-                    onPressed: () {},
+                    // 4. Acionar a abertura do menu através da chave
+                    onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                   ),
                   const SizedBox(width: 16),
                 ],
