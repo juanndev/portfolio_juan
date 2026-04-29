@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:portfolio_juan/core/hover_card.dart';
 
 class ProjectsSection extends StatelessWidget {
   const ProjectsSection({super.key});
@@ -23,7 +24,6 @@ class ProjectsSection extends StatelessWidget {
         "techs": AppTranslations.get('proj_1_techs'),
         "imagePath": "assets/images/portfolio.jpg", 
         "github": "https://github.com/juanndev/portfolio_juan",
-        //"deploy": "",
       },
       {
         "title": AppTranslations.get('proj_2_title'),
@@ -31,7 +31,6 @@ class ProjectsSection extends StatelessWidget {
         "techs": AppTranslations.get('proj_2_techs'),
         "imagePath": "assets/images/Reserva de Hoteis.jpg",
         "github": "https://github.com/juanndev/Reserva-de-Hoteis",
-        //"deploy": "",
       },
       {
         "title": AppTranslations.get('proj_3_title'),
@@ -39,7 +38,6 @@ class ProjectsSection extends StatelessWidget {
         "techs": AppTranslations.get('proj_3_techs'),
         "imagePath": "assets/images/Plataforma de Delivery.jpg",
         "github": "https://github.com/juanndev/Plataforma-de-Pedido-Online",
-        //"deploy": "",
       },
     ];
 
@@ -138,88 +136,84 @@ class ProjectsSection extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double cardWidth = screenWidth < 500 ? screenWidth * 0.85 : 442.66;
 
-    return Container(
-      width: cardWidth,
-      height: 590.25,
-      decoration: BoxDecoration(
-        color: const Color(0xFF05100A),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Container(
-              height: 260,
-              width: double.infinity,
-              color: const Color(0xFF131C18),
-              child: Image.asset(
-                project["imagePath"]!,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const Center(
-                  child: Icon(Icons.image, color: Colors.white24, size: 48),
+    return HoverCard(
+      child: Container(
+        width: cardWidth,
+        height: 590.25,
+        decoration: BoxDecoration(
+          color: const Color(0xFF05100A),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white.withOpacity(0.1)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              child: Container(
+                height: 260,
+                width: double.infinity,
+                color: const Color(0xFF131C18),
+                child: Image.asset(
+                  project["imagePath"]!,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => const Center(
+                    child: Icon(Icons.image, color: Colors.white24, size: 48),
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    project["title"]!,
-                    style: GoogleFonts.montserrat(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Expanded(
-                    child: Text(
-                      project["description"]!,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      project["title"]!,
                       style: GoogleFonts.montserrat(
-                        fontSize: 15,
-                        height: 1.5,
-                        color: const Color(0xFFA0AEC0),
-                        fontWeight: FontWeight.w400,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    project["techs"]!,
-                    style: GoogleFonts.montserrat(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    children: [
-                      _buildActionButton(
-                        icon: FontAwesomeIcons.github,
-                        label: "Github",
-                        onTap: () => _launchUrl(project["github"]!),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: Text(
+                        project["description"]!,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 15,
+                          height: 1.5,
+                          color: const Color(0xFFA0AEC0),
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                      // const SizedBox(width: 24),
-                      // _buildActionButton(
-                      //   icon: Icons.computer_outlined,
-                      //   label: "Deploy",
-                      //   onTap: () => _launchUrl(project["deploy"]!),
-                      // ),
-                    ],
-                  ),
-                ],
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      project["techs"]!,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Row(
+                      children: [
+                        _buildActionButton(
+                          icon: FontAwesomeIcons.github,
+                          label: "Github",
+                          onTap: () => _launchUrl(project["github"]!),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
