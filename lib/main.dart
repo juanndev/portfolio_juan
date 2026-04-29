@@ -12,6 +12,7 @@ import 'sections/services_section.dart';
 import 'sections/footer_section.dart';
 
 import 'core/app_translations.dart';
+import 'core/animated_reveal.dart';
 
 void main() {
   runApp(const PortfolioApp());
@@ -49,6 +50,26 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey _projectsKey = GlobalKey();
   final GlobalKey _contactKey = GlobalKey();
 
+  final ScrollController _scrollController = ScrollController();
+  final ValueNotifier<double> _scrollProgress = ValueNotifier<double>(0.0);
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.maxScrollExtent > 0) {
+        _scrollProgress.value = _scrollController.offset / _scrollController.position.maxScrollExtent;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _scrollProgress.dispose();
+    super.dispose();
+  }
+
   Future<void> _launchUrl(String url) async {
     final Uri uri = Uri.parse(url);
     if (!await launchUrl(uri)) {
@@ -77,24 +98,59 @@ class _HomePageState extends State<HomePage> {
           body: Stack(
             children: [
               SingleChildScrollView(
+                controller: _scrollController,
                 child: Column(
                   children: [
-                    Container(key: _heroKey, child: HeroSection()), 
-                    Container(key: _aboutKey, child: AboutSection()),
-                    ExperienceSection(),
-                    Container(key: _projectsKey, child: ProjectsSection()),
-                    ServicesSection(),
-                    Container(key: _contactKey, child: FooterSection()),
+                    AnimatedReveal(
+                      id: 'hero_reveal',
+                      child: Container(key: _heroKey, child: const HeroSection()),
+                    ),
+                    AnimatedReveal(
+                      id: 'about_reveal',
+                      child: Container(key: _aboutKey, child: const AboutSection()),
+                    ),
+                    const AnimatedReveal(
+                      id: 'experience_reveal',
+                      child: ExperienceSection(),
+                    ),
+                    AnimatedReveal(
+                      id: 'projects_reveal',
+                      child: Container(key: _projectsKey, child: const ProjectsSection()),
+                    ),
+                    const AnimatedReveal(
+                      id: 'services_reveal',
+                      child: ServicesSection(),
+                    ),
+                    AnimatedReveal(
+                      id: 'contact_reveal',
+                      child: Container(key: _contactKey, child: const FooterSection()),
+                    ),
                   ],
                 ),
               ),
-              
-              // Camada 2: A NavBar fixa
               Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
                 child: _buildStickyNavBar(context),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: ValueListenableBuilder<double>(
+                  valueListenable: _scrollProgress,
+                  builder: (context, progress, child) {
+                    return Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        height: 3,
+                        width: MediaQuery.of(context).size.width * progress.clamp(0.0, 1.0),
+                        color: const Color(0xFF2ECC71),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -173,7 +229,6 @@ class _HomePageState extends State<HomePage> {
                 ] else ...[
                   IconButton(
                     icon: const Icon(Icons.menu, color: Colors.white),
-                    // 4. Acionar a abertura do menu através da chave
                     onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                   ),
                   const SizedBox(width: 16),
