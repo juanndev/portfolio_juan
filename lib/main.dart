@@ -103,27 +103,27 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     AnimatedReveal(
                       id: 'hero_reveal',
-                      child: Container(key: _heroKey, child: const HeroSection()),
+                      child: Container(key: _heroKey, child: HeroSection()),
                     ),
                     AnimatedReveal(
                       id: 'about_reveal',
-                      child: Container(key: _aboutKey, child: const AboutSection()),
+                      child: Container(key: _aboutKey, child: AboutSection()),
                     ),
-                    const AnimatedReveal(
+                    AnimatedReveal(
                       id: 'experience_reveal',
                       child: ExperienceSection(),
                     ),
                     AnimatedReveal(
                       id: 'projects_reveal',
-                      child: Container(key: _projectsKey, child: const ProjectsSection()),
+                      child: Container(key: _projectsKey, child: ProjectsSection()),
                     ),
-                    const AnimatedReveal(
+                    AnimatedReveal(
                       id: 'services_reveal',
                       child: ServicesSection(),
                     ),
                     AnimatedReveal(
                       id: 'contact_reveal',
-                      child: Container(key: _contactKey, child: const FooterSection()),
+                      child: Container(key: _contactKey, child: FooterSection()),
                     ),
                   ],
                 ),
