@@ -34,43 +34,10 @@ class FooterSection extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 48),
-              
-              // Botão de Contato Estilizado
-              OutlinedButton(
-                onPressed: _launchContact,
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
-                  side: BorderSide(color: Colors.white.withOpacity(0.1)),
-                  backgroundColor: const Color(0xFF0B1911), 
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      AppTranslations.get('footer_btn'),
-                      style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    const Icon(
-                      Icons.north_east,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ],
-                ),
-              ),
+              _MagneticContactButton(onTap: _launchContact),
             ],
           ),
         ),
-
-        // --- BARRA VERDE DE COPYRIGHT ---
         Container(
           width: double.infinity,
           color: const Color(0xFF2ECC71),
@@ -88,6 +55,76 @@ class FooterSection extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _MagneticContactButton extends StatefulWidget {
+  final VoidCallback onTap;
+
+  const _MagneticContactButton({required this.onTap});
+
+  @override
+  State<_MagneticContactButton> createState() => _MagneticContactButtonState();
+}
+
+class _MagneticContactButtonState extends State<_MagneticContactButton> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutCubic,
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+          decoration: BoxDecoration(
+            color: _isHovered ? const Color(0xFF2ECC71).withOpacity(0.1) : const Color(0xFF0B1911),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: _isHovered ? const Color(0xFF2ECC71) : Colors.white.withOpacity(0.1),
+            ),
+            boxShadow: _isHovered
+                ? [
+                    BoxShadow(
+                      color: const Color(0xFF2ECC71).withOpacity(0.2),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
+                    )
+                  ]
+                : [],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                AppTranslations.get('footer_btn'),
+                style: GoogleFonts.inter(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 12),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOutBack,
+                transform: _isHovered ? (Matrix4.identity()..translate(4.0, -4.0)) : Matrix4.identity(),
+                child: const Icon(
+                  Icons.north_east,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
