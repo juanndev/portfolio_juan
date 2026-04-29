@@ -156,52 +156,63 @@ class _ExperienceSectionState extends State<ExperienceSection> {
   Widget _buildRightContent() {
     final activeData = experiences[_selectedIndex];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          alignment: WrapAlignment.spaceBetween,
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOut,
+      alignment: Alignment.topCenter,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 600),
+        switchInCurve: Curves.easeInOut,
+        switchOutCurve: Curves.easeInOut,
+        child: Column(
+          key: ValueKey<int>(_selectedIndex),
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              alignment: WrapAlignment.spaceBetween,
+              children: [
+                Text(
+                  activeData["role"]!,
+                  style: GoogleFonts.inter(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Text(
+                  activeData["date"]!,
+                  style: GoogleFonts.inter(
+                    color: const Color(0xFFA0AEC0),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
             Text(
-              activeData["role"]!,
+              activeData["company"]!,
               style: GoogleFonts.inter(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
+                color: const Color(0xFF2ECC71),
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(height: 24),
             Text(
-              activeData["date"]!,
+              activeData["description"]!,
               style: GoogleFonts.inter(
                 color: const Color(0xFFA0AEC0),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                height: 1.6,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 12),
-        Text(
-          activeData["company"]!,
-          style: GoogleFonts.inter(
-            color: const Color(0xFF2ECC71),
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        const SizedBox(height: 24),
-        Text(
-          activeData["description"]!,
-          style: GoogleFonts.inter(
-            color: const Color(0xFFA0AEC0),
-            fontSize: 16,
-            height: 1.6,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
