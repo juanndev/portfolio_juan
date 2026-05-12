@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
-import 'dart:html' as html;
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html; 
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:seo/seo.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
@@ -23,24 +25,32 @@ class HeroSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 140),
-            Text(
-              'Juan Mota',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
-                fontSize: titleSize,
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
-                letterSpacing: -2,
+            Seo.text(
+              text: 'Juan Mota',
+              style: TextTagStyle.h1,
+              child: Text(
+                'Juan Mota',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontSize: titleSize,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                  letterSpacing: -2,
+                ),
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              AppTranslations.get('hero_subtitle'),
-              textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
-                fontSize: subtitleSize,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFFE2E8F0),
+            Seo.text(
+              text: AppTranslations.get('hero_subtitle'),
+              style: TextTagStyle.h2,
+              child: Text(
+                AppTranslations.get('hero_subtitle'),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontSize: subtitleSize,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xFFE2E8F0),
+                ),
               ),
             ),
             const SizedBox(height: 40),
@@ -140,31 +150,6 @@ class HeroSection extends StatelessWidget {
               ),
         );
       }),
-    );
-  }
-}
-
-// ignore: unused_element
-class _NavBarLink extends StatelessWidget {
-  final String text;
-
-  const _NavBarLink({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      hoverColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      child: Text(
-        text,
-        style: GoogleFonts.inter(
-          color: Colors.white.withOpacity(0.9),
-          fontSize: 15,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
     );
   }
 }

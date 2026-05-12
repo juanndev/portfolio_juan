@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:seo/seo.dart';
 
 class ServicesSection extends StatelessWidget {
   const ServicesSection({super.key});
@@ -39,9 +40,13 @@ class ServicesSection extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    AppTranslations.get('services_title'),
-                    style: GoogleFonts.inter(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)
+                  Seo.text(
+                    text: AppTranslations.get('services_title'),
+                    style: TextTagStyle.h2,
+                    child: Text(
+                      AppTranslations.get('services_title'),
+                      style: GoogleFonts.inter(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)
+                    ),
                   ),
                   const Text(
                     ' .',
@@ -138,14 +143,22 @@ class _ServiceCardState extends State<_ServiceCard> {
               width: 48,
             ).animate(target: _isHovered ? 1 : 0).moveY(begin: 0, end: -8, duration: 250.ms, curve: Curves.easeOutBack),
             const SizedBox(height: 32),
-            Text(
-              widget.service["title"]!,
-              style: GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.white),
+            Seo.text(
+              text: widget.service["title"]!,
+              style: TextTagStyle.h3,
+              child: Text(
+                widget.service["title"]!,
+                style: GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.white),
+              ),
             ),
             const SizedBox(height: 16),
-            Text(
-              widget.service["description"]!,
-              style: GoogleFonts.inter(fontSize: 15, height: 1.6, color: const Color(0xFFA0AEC0)),
+            Seo.text(
+              text: widget.service["description"]!,
+              style: TextTagStyle.p,
+              child: Text(
+                widget.service["description"]!,
+                style: GoogleFonts.inter(fontSize: 15, height: 1.6, color: const Color(0xFFA0AEC0)),
+              ),
             ),
           ],
         ),

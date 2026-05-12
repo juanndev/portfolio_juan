@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:seo/seo.dart';
 
 class FooterSection extends StatelessWidget {
   const FooterSection({super.key});
@@ -23,18 +24,26 @@ class FooterSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 120, horizontal: 24),
           child: Column(
             children: [
-              Text(
-                AppTranslations.get('footer_cta'),
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: -0.5,
+              Seo.text(
+                text: AppTranslations.get('footer_cta'),
+                style: TextTagStyle.p,
+                child: Text(
+                  AppTranslations.get('footer_cta'),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.5,
+                  ),
                 ),
               ),
               const SizedBox(height: 48),
-              _MagneticContactButton(onTap: _launchContact),
+              Seo.link(
+                href: 'mailto:contatojuanndev@gmail.com',
+                anchor: 'Enviar e-mail para Juan Mota',
+                child: _MagneticContactButton(onTap: _launchContact),
+              ),
             ],
           ),
         ),

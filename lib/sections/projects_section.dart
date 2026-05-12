@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:portfolio_juan/core/hover_card.dart';
+import 'package:seo/seo.dart';
 
 class ProjectsSection extends StatelessWidget {
   const ProjectsSection({super.key});
@@ -64,12 +65,16 @@ class ProjectsSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                AppTranslations.get('proj_title'),
-                style: GoogleFonts.montserrat(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
+              Seo.text(
+                text: AppTranslations.get('proj_title'),
+                style: TextTagStyle.h2,
+                child: Text(
+                  AppTranslations.get('proj_title'),
+                  style: GoogleFonts.montserrat(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               Text(
@@ -154,11 +159,15 @@ class ProjectsSection extends StatelessWidget {
                 height: 260,
                 width: double.infinity,
                 color: const Color(0xFF131C18),
-                child: Image.asset(
-                  project["imagePath"]!,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => const Center(
-                    child: Icon(Icons.image, color: Colors.white24, size: 48),
+                child: Seo.image(
+                  src: project["imagePath"]!,
+                  alt: project["title"]!,
+                  child: Image.asset(
+                    project["imagePath"]!,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => const Center(
+                      child: Icon(Icons.image, color: Colors.white24, size: 48),
+                    ),
                   ),
                 ),
               ),
@@ -169,23 +178,31 @@ class ProjectsSection extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      project["title"]!,
-                      style: GoogleFonts.montserrat(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                    Seo.text(
+                      text: project["title"]!,
+                      style: TextTagStyle.h3,
+                      child: Text(
+                        project["title"]!,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
                     Expanded(
-                      child: Text(
-                        project["description"]!,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 15,
-                          height: 1.5,
-                          color: const Color(0xFFA0AEC0),
-                          fontWeight: FontWeight.w400,
+                      child: Seo.text(
+                        text: project["description"]!,
+                        style: TextTagStyle.p,
+                        child: Text(
+                          project["description"]!,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 15,
+                            height: 1.5,
+                            color: const Color(0xFFA0AEC0),
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),
@@ -201,10 +218,14 @@ class ProjectsSection extends StatelessWidget {
                     const SizedBox(height: 24),
                     Row(
                       children: [
-                        _buildActionButton(
-                          icon: FontAwesomeIcons.github,
-                          label: "Github",
-                          onTap: () => _launchUrl(project["github"]!),
+                        Seo.link(
+                          href: project["github"]!,
+                          anchor: 'Repositório GitHub do projeto ${project["title"]}',
+                          child: _buildActionButton(
+                            icon: FontAwesomeIcons.github,
+                            label: "Github",
+                            onTap: () => _launchUrl(project["github"]!),
+                          ),
                         ),
                       ],
                     ),

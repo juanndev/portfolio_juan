@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
+import 'package:seo/seo.dart';
 
 class ExperienceSection extends StatefulWidget {
   const ExperienceSection({super.key});
@@ -57,12 +58,16 @@ class _ExperienceSectionState extends State<ExperienceSection> {
             children: [
               Row(
                 children: [
-                  Text(
-                    AppTranslations.get('exp_title'),
-                    style: GoogleFonts.inter(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                  Seo.text(
+                    text: AppTranslations.get('exp_title'),
+                    style: TextTagStyle.h2,
+                    child: Text(
+                      AppTranslations.get('exp_title'),
+                      style: GoogleFonts.inter(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   Text(
@@ -172,12 +177,16 @@ class _ExperienceSectionState extends State<ExperienceSection> {
               crossAxisAlignment: WrapCrossAlignment.center,
               alignment: WrapAlignment.spaceBetween,
               children: [
-                Text(
-                  activeData["role"]!,
-                  style: GoogleFonts.inter(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
+                Seo.text(
+                  text: activeData["role"]!,
+                  style: TextTagStyle.h3,
+                  child: Text(
+                    activeData["role"]!,
+                    style: GoogleFonts.inter(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -201,13 +210,17 @@ class _ExperienceSectionState extends State<ExperienceSection> {
               ),
             ),
             const SizedBox(height: 24),
-            Text(
-              activeData["description"]!,
-              style: GoogleFonts.inter(
-                color: const Color(0xFFA0AEC0),
-                fontSize: 16,
-                height: 1.6,
-                fontWeight: FontWeight.w300,
+            Seo.text(
+              text: activeData["description"]!,
+              style: TextTagStyle.p,
+              child: Text(
+                activeData["description"]!,
+                style: GoogleFonts.inter(
+                  color: const Color(0xFFA0AEC0),
+                  fontSize: 16,
+                  height: 1.6,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
             ),
           ],
