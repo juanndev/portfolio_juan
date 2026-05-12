@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:seo/seo.dart';
 
 import 'sections/hero_section.dart';
 import 'sections/about_section.dart';
@@ -15,7 +16,11 @@ import 'core/app_translations.dart';
 import 'core/animated_reveal.dart';
 
 void main() {
+  usePathUrlStrategy();
   runApp(const PortfolioApp());
+}
+
+void usePathUrlStrategy() {
 }
 
 class PortfolioApp extends StatelessWidget {
@@ -23,14 +28,18 @@ class PortfolioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Juan Mota | Portfolio',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF03120A),
-        colorScheme: const ColorScheme.dark(primary: Color(0xFF2ECC71)),
+    return SeoController(
+      enabled: true,
+      tree: WidgetTree(context: context),
+      child: MaterialApp(
+        title: 'Juan Mota | Portfolio',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFF03120A),
+          colorScheme: const ColorScheme.dark(primary: Color(0xFF2ECC71)),
+        ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }
@@ -234,13 +243,21 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(width: 16),
                 ],
                 
-                IconButton(
-                  onPressed: () => _launchUrl('https://github.com/juanndev'), 
-                  icon: const FaIcon(FontAwesomeIcons.github, color: Colors.white, size: 20),
+                Seo.link(
+                  href: 'https://github.com/juanndev',
+                  anchor: 'GitHub de Juan Mota',
+                  child: IconButton(
+                    onPressed: () => _launchUrl('https://github.com/juanndev'), 
+                    icon: const FaIcon(FontAwesomeIcons.github, color: Colors.white, size: 20),
+                  ),
                 ),
-                IconButton(
-                  onPressed: () => _launchUrl('https://www.linkedin.com/in/juanndev/'), 
-                  icon: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.white, size: 20),
+                Seo.link(
+                  href: 'https://www.linkedin.com/in/juanndev/',
+                  anchor: 'LinkedIn de Juan Mota',
+                  child: IconButton(
+                    onPressed: () => _launchUrl('https://www.linkedin.com/in/juanndev/'), 
+                    icon: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.white, size: 20),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 
