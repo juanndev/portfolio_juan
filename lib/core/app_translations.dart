@@ -5,238 +5,276 @@ final ValueNotifier<String> appLanguage = ValueNotifier<String>('pt');
 class AppTranslations {
   static const Map<String, Map<String, String>> _texts = {
     'pt': {
-      // Menu (NavBar)
-      'nav_projects': 'Projetos',
-      'nav_about': 'Sobre',
-      'nav_contact': 'Contato',
+      'nav_about': '01. Sobre',
+      'nav_exp': '02. Experiência',
+      'nav_projects': '03. Projetos',
+      'nav_stack': '04. Stack',
+      'nav_serv': '05. Serviços',
+      'nav_contact': '06. Contato',
       
-      // Seção 1: Hero
+      'hero_hello': '_hello_world',
       'hero_subtitle': 'Desenvolvedor Mobile e Front-end',
+      'hero_desc': 'Especialista em Flutter & Dart focado em escalabilidade.\nCombinando desenvolvimento mobile de alto desempenho com engenharia de segurança (AppSec).',
       'hero_btn': 'Download CV',
       'hero_exp': 'Experiência com:',
       
-      // Seção 2: About
-      'about_title': 'Quem sou',
+      'typewriter_1': 'Desenvolvedor Mobile',
+      'typewriter_2': 'Engenheiro AppSec',
+      'typewriter_3': 'UI/UX Designer',
+      
+      'about_title': 'Sobre Mim',
       'about_subtitle': 'Frontend Developer & Mobile',
-      'about_desc': 'Sou desenvolvedor mobile especializado em Flutter e Dart, atualmente atuando na FoxAppy. Além da criação de interfaces de alta qualidade, sou pós-graduando em Cibersegurança pela Wyden, onde aprofundo meus conhecimentos em AppSec e DevSecOps. Meu foco é construir aplicativos que não sejam apenas visualmente modernos e performáticos, mas também blindados e seguros na arquitetura.',
+      'about_desc': 'Sou graduado em Análise e Desenvolvimento de Sistemas pela Cruzeiro do Sul e pós-graduando em Cibersegurança pela Wyden. Meu foco é construir arquiteturas robustas no ecossistema mobile, garantindo que a segurança seja tratada desde o design (Security by Design).\n\nTrabalho primariamente em ambiente macOS e sou apaixonado por tecnologia de ponta. Dedico meu tempo livre estudando novas abordagens de desenvolvimento, explorando conceitos de segurança ofensiva e aprimorando minhas habilidades em design e criação de produtos digitais.',
+      'term_role': 'mobile_developer && security_enthusiast',
       
-      // Seção 3: Serviços
-      'services_title': 'Serviços',
-      'services_ui_title': 'UI Design',
-      'services_ui_desc': 'Desenho interface no Figma de forma que ela seja clara, objetiva e principalmente intuitiva para a experiência do usuário.',
-      'services_dev_title': 'Desenvolvimento',
-      'services_dev_desc': 'Desenvolvo frontend de sites profissionais, blogs, SaaS, landing pages, ecommerce e entre outros websites.',
-      'services_app_title': 'Criação de apps',
-      'services_app_desc': 'Crio interações entre elementos que transmitem sensação de modernidade, além de chamarem a atenção do usuário.',
+      'services_title': 'Serviços que Ofereço',
+      'services_ui_title': 'Design Gráfico & UI/UX',
+      'services_ui_desc': 'Produção de identidade visual, criação de banners, artes para mídias sociais (Instagram) e prototipação de interfaces completas utilizando Figma.',
+      'services_dev_title': 'Desenvolvimento Web',
+      'services_dev_desc': 'Construção de sites institucionais, portfólios e Landing Pages focadas em conversão. Utilizando tecnologias modernas como HTML, CSS e JavaScript.',
+      'services_app_title': 'Desenvolvimento Mobile',
+      'services_app_desc': 'Criação de aplicativos nativos e multiplataforma de alta performance utilizando Flutter e Dart. Foco em interfaces fluidas e seguras.',
       
-      // Seção 4: Footer / CTA
-      'footer_cta': 'Deseja discutir uma oportunidade para criar algo incrível? Estou à disposição.',
-      'footer_btn': 'Entrar em contato',
-      'footer_copy': 'Copyright © 2026 juanndev.com. Todos os direitos reservados.',
+      'footer_cta': 'Vamos Conversar?',
+      'footer_btn': 'Enviar Mensagem',
+      'footer_copy': 'console.log("Stay Secure"); // 2026',
 
-      // Seção 5: Experiência
-      'exp_title': 'Experiências',
+      'exp_title': 'Experiência Corporativa',
       
       'exp_1_menu': 'FoxAppy',
-      'exp_1_role': 'Software Engineer, Mobile (Flutter)',
-      'exp_1_date': 'Novembro 2024 - No momento',
-      'exp_1_company': 'FoxAppy',
-      'exp_1_desc': 'Implementei arquitetura de segurança em escala corporativa integrando ferramentas SAST, processos de Mobile Hardening e Cloud Security para reduzir vulnerabilidades no SDLC completo.\n\nArquitetei e liderei desenvolvimento de solução AR inovadora do zero usando Flutter, permitindo visualização de produtos em tempo real através de fotografia de ambientes.\n\nGerenciei ciclo completo de 100+ aplicações no Google Play e App Store, otimizando pipelines de deployment para garantir consistência e confiabilidade em escala.',
+      'exp_1_role': 'Desenvolvedor Mobile Flutter',
+      'exp_1_date': 'Nov 2024 - Presente',
+      'exp_1_company': '@ FoxAppy',
+      'exp_1_desc': 'Desenvolvimento do core de aplicativos mobile baseados em assinatura para o ecossistema de e-commerce.\nGarantia de performance, fluidez e escalabilidade da base de código Dart.',
       
-      'exp_2_menu': 'Upside Inteligência Web',
-      'exp_2_role': 'Desenvolvedor Front-end Pleno',
-      'exp_2_date': 'Agosto 2024 - Janeiro 2026',
-      'exp_2_company': 'Upside Inteligência Web',
-      'exp_2_desc': 'Desenvolvi e renovei interfaces responsivas para websites de clientes usando WordPress, HTML5, CSS3 e JavaScript, melhorando experiência do usuário através de layouts intuitivos e animações modernas.',
+      'exp_2_menu': 'Upside',
+      'exp_2_role': 'Desenvolvedor Front-end',
+      'exp_2_date': 'Ago 2024 - Jan 2026',
+      'exp_2_company': '@ Upside Inteligência Web',
+      'exp_2_desc': 'Criação de interfaces web interativas e responsivas utilizando tecnologias modernas.\nOtimização de performance web e integração com APIs.',
       
       'exp_3_menu': 'CHA SOCIAL',
-      'exp_3_role': 'Marketing Designer',
-      'exp_3_date': 'Março 2024 - Outubro 2024',
-      'exp_3_company': 'CHA SOCIAL',
-      'exp_3_desc': 'Desenvolvi alto volume de criativos publicitários (estáticos e vídeos) como membro-chave da equipe de performance marketing, gerando leads qualificados para portfólio diversificado de clientes.\n\nProjetei e construí landing pages de alta conversão para lançamentos de produtos e cursos, otimizando jornada do usuário através de CTAs claros para maximizar taxas de conversão.',
+      'exp_3_role': 'Marketing Design',
+      'exp_3_date': 'Mar 2024 - Out 2024',
+      'exp_3_company': '@ CHA SOCIAL',
+      'exp_3_desc': 'Produção de peças visuais para campanhas de marketing digital e redes sociais.',
       
       'exp_4_menu': 'Agência Kottler',
-      'exp_4_role': 'Brand & Digital Designer',
-      'exp_4_date': 'Novembro 2023 - Março 2024',
-      'exp_4_company': 'Agência Kottler',
-      'exp_4_desc': 'Desenvolvi sistemas completos de identidade visual e marca para clientes-chave, criando campanhas de marketing coesas que abrangeram canais digitais e impressos de forma integrada.',
+      'exp_4_role': 'Brand & Digital Design',
+      'exp_4_date': 'Nov 2023 - Mar 2024',
+      'exp_4_company': '@ Agência Kottler',
+      'exp_4_desc': 'Desenvolvimento de identidade visual e design digital focado na presença online de marcas.',
 
-      // Seção 6: Projetos
-      'proj_title': 'Projetos',
+      'proj_title': 'Iniciativas & Projetos',
       'proj_subtitle': '*Passe para o lado para ver os projetos*',
       
-      'proj_1_title': 'Meu Portfólio',
-      'proj_1_desc': 'Meu portfólio pessoal desenvolvido com Flutter Web. O projeto possui internacionalização dinâmica (PT, EN, ES), responsividade avançada e um design moderno focado em UI/UX.',
-      'proj_1_techs': 'Flutter • Dart',
+      // NOVOS PROJETOS
+      'proj_1_title': 'Portfólio Web',
+      'proj_1_desc': 'Meu portfólio pessoal e interativo desenvolvido do zero. Arquitetura componentizada focada em responsividade, performance e design fluído.',
+      'proj_1_techs': 'Flutter • Dart • Web',
       
-      'proj_2_title': 'Sistema de Reserva de Hotéis',
-      'proj_2_desc': 'Plataforma multipáginas de reserva de hotéis com Bootstrap 5 e jQuery. Foco em arquitetura CSS modular e responsividade.',
-      'proj_2_techs': 'HTML5 • CSS3 • Javascript',
+      'proj_2_title': 'Security Audit Case',
+      'proj_2_desc': 'Estudo de caso focado em auditoria de segurança em aplicativos Flutter. Mapeamento prático de vulnerabilidades e implementação de engenharia de defesa.',
+      'proj_2_techs': 'AppSec • Dart • Security',
       
-      'proj_3_title': 'Food Commerce - Plataforma de Delivery',
+      'proj_3_title': 'Food Commerce',
       'proj_3_desc': 'Plataforma de pedidos online com React e TS. Foco em gerenciamento de estado, filtros dinâmicos e experiência mobile-first.',
-      'proj_3_techs': 'React • Typescript • Styled Components',
+      'proj_3_techs': 'React • Typescript',
       
       'proj_btn_github': 'Github',
       'proj_btn_deploy': 'Deploy',
+      
+      'stack_title': 'Habilidades & Stack',
+
+      'contact_fname': 'Nome',
+      'contact_lname': 'Sobrenome',
+      'contact_email': 'E-mail',
+      'contact_phone': 'Telefone',
+      'contact_service': 'Selecione o serviço...',
+      'contact_msg': 'Sua mensagem ou detalhes do projeto...',
     },
     
     'en': {
-      // Menu (NavBar)
-      'nav_projects': 'Projects',
-      'nav_about': 'About',
-      'nav_contact': 'Contact',
+      'nav_about': '01. About',
+      'nav_exp': '02. Experience',
+      'nav_projects': '03. Projects',
+      'nav_stack': '04. Stack',
+      'nav_serv': '05. Services',
+      'nav_contact': '06. Contact',
       
-      // Seção 1: Hero
+      'hero_hello': '_hello_world',
       'hero_subtitle': 'Mobile & Front-end Developer',
+      'hero_desc': 'Flutter & Dart specialist focused on scalability.\nCombining high-performance mobile development with security engineering (AppSec).',
       'hero_btn': 'Download CV',
       'hero_exp': 'Experience with:',
       
-      // Seção 2: About
-      'about_title': 'Who I am',
+      'typewriter_1': 'Mobile Developer',
+      'typewriter_2': 'AppSec Engineer',
+      'typewriter_3': 'UI/UX Designer',
+      
+      'about_title': 'About Me',
       'about_subtitle': 'Frontend & Mobile Developer',
-      'about_desc': 'I am a mobile developer specializing in Flutter and Dart, currently working at FoxAppy. In addition to creating high-quality interfaces, I am pursuing a postgraduate degree in Cybersecurity at Wyden, deepening my knowledge in AppSec and DevSecOps. My focus is building apps that are not only visually modern and fast, but also architecturally bulletproof and secure.',
+      'about_desc': 'I hold a degree in Systems Analysis and Development from Cruzeiro do Sul and am pursuing a postgraduate degree in Cybersecurity at Wyden. My focus is building robust architectures in the mobile ecosystem, ensuring security by design.\n\nI work primarily in a macOS environment and am passionate about cutting-edge technology. I dedicate my free time to studying new development approaches, exploring offensive security concepts, and improving my skills in design and digital product creation.',
+      'term_role': 'mobile_developer && security_enthusiast',
       
-      // Seção 3: Serviços
-      'services_title': 'Services',
-      'services_ui_title': 'UI Design',
-      'services_ui_desc': 'I design clear, objective, and highly intuitive interfaces in Figma focused on user experience.',
-      'services_dev_title': 'Development',
-      'services_dev_desc': 'I develop the frontend of professional websites, blogs, SaaS, landing pages, e-commerce, and more.',
-      'services_app_title': 'App Creation',
-      'services_app_desc': 'I create interactions between elements that convey a modern feel and capture the user\'s attention.',
+      'services_title': 'Services I Offer',
+      'services_ui_title': 'Graphic Design & UI/UX',
+      'services_ui_desc': 'Visual identity production, banners, social media art (Instagram), and full interface prototyping using Figma.',
+      'services_dev_title': 'Web Development',
+      'services_dev_desc': 'Building institutional websites, portfolios, and conversion-focused Landing Pages. Using modern tech like HTML, CSS, and JavaScript.',
+      'services_app_title': 'Mobile Development',
+      'services_app_desc': 'Creation of high-performance native and cross-platform apps using Flutter and Dart. Focus on fluid and secure interfaces.',
       
-      // Seção 4: Footer / CTA
-      'footer_cta': 'Want to discuss an opportunity to create something amazing? I am available.',
-      'footer_btn': 'Get in touch',
-      'footer_copy': 'Copyright © 2026 juanndev.com. All rights reserved.',
+      'footer_cta': 'Let\'s Talk?',
+      'footer_btn': 'Send Message',
+      'footer_copy': 'console.log("Stay Secure"); // 2026',
 
-      // Seção 5: Experiência
-      'exp_title': 'Experiences',
+      'exp_title': 'Corporate Experience',
       
       'exp_1_menu': 'FoxAppy',
-      'exp_1_role': 'Software Engineer, Mobile (Flutter)',
-      'exp_1_date': 'November 2024 - Present',
-      'exp_1_company': 'FoxAppy',
-      'exp_1_desc': 'Implemented enterprise-scale security architecture by integrating SAST tools, Mobile Hardening processes, and Cloud Security to reduce vulnerabilities across the full SDLC.\n\nArchitected and led the development of an innovative AR solution from scratch using Flutter, enabling real-time product visualization through environment photography.\n\nManaged the full lifecycle of 100+ applications on Google Play and the App Store, optimizing deployment pipelines to ensure consistency and reliability at scale.',
+      'exp_1_role': 'Mobile Flutter Developer',
+      'exp_1_date': 'Nov 2024 - Present',
+      'exp_1_company': '@ FoxAppy',
+      'exp_1_desc': 'Core development of subscription-based mobile applications for the e-commerce ecosystem.\nEnsuring performance, fluidity, and scalability of the Dart codebase.',
       
-      'exp_2_menu': 'Upside Web Intelligence',
-      'exp_2_role': 'Mid-level Front-end Developer',
-      'exp_2_date': 'August 2024 - January 2026',
-      'exp_2_company': 'Upside Web Intelligence',
-      'exp_2_desc': 'Developed and revamped responsive interfaces for client websites using WordPress, HTML5, CSS3, and JavaScript, improving the user experience through intuitive layouts and modern animations.',
+      'exp_2_menu': 'Upside',
+      'exp_2_role': 'Front-end Developer',
+      'exp_2_date': 'Aug 2024 - Jan 2026',
+      'exp_2_company': '@ Upside Web Intelligence',
+      'exp_2_desc': 'Creation of interactive and responsive web interfaces using modern technologies.\nWeb performance optimization and API integration.',
       
       'exp_3_menu': 'CHA SOCIAL',
-      'exp_3_role': 'Marketing Designer',
-      'exp_3_date': 'March 2024 - October 2024',
-      'exp_3_company': 'CHA SOCIAL',
-      'exp_3_desc': 'Developed a high volume of advertising creatives (static and video) as a key member of the performance marketing team, generating qualified leads for a diverse portfolio of clients.\n\nDesigned and built high-converting landing pages for product and course launches, optimizing the user journey through clear CTAs to maximize conversion rates.',
+      'exp_3_role': 'Marketing Design',
+      'exp_3_date': 'Mar 2024 - Oct 2024',
+      'exp_3_company': '@ CHA SOCIAL',
+      'exp_3_desc': 'Production of visual assets for digital marketing campaigns and social media.',
       
       'exp_4_menu': 'Agência Kottler',
-      'exp_4_role': 'Brand & Digital Designer',
-      'exp_4_date': 'November 2023 - March 2024',
-      'exp_4_company': 'Agência Kottler',
-      'exp_4_desc': 'Developed complete visual identity and brand systems for key clients, creating cohesive marketing campaigns that seamlessly spanned digital and print channels.',
+      'exp_4_role': 'Brand & Digital Design',
+      'exp_4_date': 'Nov 2023 - Mar 2024',
+      'exp_4_company': '@ Agência Kottler',
+      'exp_4_desc': 'Development of visual identity and digital design focused on brands\' online presence.',
 
-      // Seção 6: Projetos
-      'proj_title': 'Projects',
+      'proj_title': 'Initiatives & Projects',
       'proj_subtitle': '*Swipe sideways to see the projects*',
       
-      'proj_1_title': 'My Portfolio',
-      'proj_1_desc': 'My personal portfolio developed with Flutter Web. The project features dynamic internationalization (PT, EN, ES), advanced responsiveness, and a modern design focused on UI/UX.',
-      'proj_1_techs': 'Flutter • Dart',
+      // NOVOS PROJETOS - EN
+      'proj_1_title': 'Web Portfolio',
+      'proj_1_desc': 'My personal interactive portfolio built from scratch. Componentized responsive design focused on performance and fluid UI using Flutter Web.',
+      'proj_1_techs': 'Flutter • Dart • Web',
       
-      'proj_2_title': 'Hotel Reservation System',
-      'proj_2_desc': 'Multi-page hotel booking platform using Bootstrap 5 and jQuery. Focus on modular CSS architecture and responsiveness.',
-      'proj_2_techs': 'HTML5 • CSS3 • Javascript',
+      'proj_2_title': 'Security Audit Case',
+      'proj_2_desc': 'Case study on security auditing in Flutter applications. Practical mapping of vulnerabilities and defense engineering implementation.',
+      'proj_2_techs': 'AppSec • Dart • Security',
       
-      'proj_3_title': 'Food Commerce - Delivery Platform',
+      'proj_3_title': 'Food Commerce',
       'proj_3_desc': 'Online ordering platform powered by React and TS. Focus on state management, dynamic filters, and a mobile-first experience.',
-      'proj_3_techs': 'React • Typescript • Styled Components',
+      'proj_3_techs': 'React • Typescript',
       
       'proj_btn_github': 'Github',
       'proj_btn_deploy': 'Deploy',
+      
+      'stack_title': 'Skills & Stack',
+
+      'contact_fname': 'First Name',
+      'contact_lname': 'Last Name',
+      'contact_email': 'Email',
+      'contact_phone': 'Phone',
+      'contact_service': 'Select a service...',
+      'contact_msg': 'Your message or project details...',
     },
     
     'es': {
-      // Menu (NavBar)
-      'nav_projects': 'Proyectos',
-      'nav_about': 'Sobre mí',
-      'nav_contact': 'Contacto',
+      'nav_about': '01. Sobre Mí',
+      'nav_exp': '02. Experiencia',
+      'nav_projects': '03. Proyectos',
+      'nav_stack': '04. Stack',
+      'nav_serv': '05. Servicios',
+      'nav_contact': '06. Contacto',
       
-      // Seção 1: Hero
+      'hero_hello': '_hola_mundo',
       'hero_subtitle': 'Desarrollador Mobile y Front-end',
+      'hero_desc': 'Especialista en Flutter & Dart enfocado en escalabilidad.\nCombinando desarrollo móvil de alto rendimiento con ingeniería de seguridad (AppSec).',
       'hero_btn': 'Descargar CV',
       'hero_exp': 'Experiencia con:',
       
-      // Seção 2: About
-      'about_title': 'Quién soy',
+      'typewriter_1': 'Desarrollador Móvil',
+      'typewriter_2': 'Ingeniero AppSec',
+      'typewriter_3': 'Diseñador UI/UX',
+      
+      'about_title': 'Sobre Mí',
       'about_subtitle': 'Desarrollador Frontend y Mobile',
-      'about_desc': 'Soy un desarrollador mobile especializado en Flutter y Dart, actualmente trabajando en FoxAppy. Además de crear interfaces de alta calidad, estoy cursando un posgrado en Ciberseguridad en Wyden, profundizando mis conocimientos en AppSec y DevSecOps. Mi enfoque es construir aplicaciones que no solo sean visualmente modernas y rápidas, sino también seguras y con una arquitectura blindada.',
+      'about_desc': 'Graduado en Análisis y Desarrollo de Sistemas por Cruzeiro do Sul y cursando un posgrado en Ciberseguridad en Wyden. Mi enfoque es construir arquitecturas robustas en el ecosistema móvil, garantizando la seguridad desde el diseño.\n\nTrabajo principalmente en un entorno macOS y me apasiona la tecnología punta. Dedico mi tiempo libre a estudiar nuevos enfoques de desarrollo, explorar conceptos de seguridad ofensiva y mejorar mis habilidades en diseño y creación de productos digitales.',
+      'term_role': 'desarrollador_movil && entusiasta_seguridad',
       
-      // Seção 3: Serviços
-      'services_title': 'Servicios',
-      'services_ui_title': 'Diseño UI',
-      'services_ui_desc': 'Diseño interfaces en Figma de forma clara, objetiva y principalmente intuitiva para la experiencia del usuario.',
-      'services_dev_title': 'Desarrollo',
-      'services_dev_desc': 'Desarrollo el frontend de sitios web profesionales, blogs, SaaS, landing pages, ecommerce y más.',
-      'services_app_title': 'Creación de apps',
-      'services_app_desc': 'Creo interacciones entre elementos que transmiten una sensación de modernidad y captan la atención del usuario.',
+      'services_title': 'Servicios que Ofrezco',
+      'services_ui_title': 'Diseño Gráfico & UI/UX',
+      'services_ui_desc': 'Producción de identidad visual, banners, arte para redes sociales (Instagram) y prototipado completo de interfaces usando Figma.',
+      'services_dev_title': 'Desarrollo Web',
+      'services_dev_desc': 'Construcción de sitios institucionales, portafolios y Landing Pages enfocadas en conversión. Usando tecnología moderna como HTML, CSS y JavaScript.',
+      'services_app_title': 'Desarrollo Móvil',
+      'services_app_desc': 'Creación de aplicaciones nativas y multiplataforma de alto rendimiento con Flutter y Dart. Enfoque en interfaces fluidas y seguras.',
       
-      // Seção 4: Footer / CTA
-      'footer_cta': '¿Deseas discutir una oportunidad para crear algo increíble? Estoy a tu disposición.',
-      'footer_btn': 'Ponerse en contacto',
-      'footer_copy': 'Copyright © 2026 juanndev.com. Todos los derechos reservados.',
+      'footer_cta': '¿Hablamos?',
+      'footer_btn': 'Enviar Mensaje',
+      'footer_copy': 'console.log("Stay Secure"); // 2026',
 
-      // Seção 5: Experiência
-      'exp_title': 'Experiencias',
+      'exp_title': 'Experiencia Corporativa',
       
       'exp_1_menu': 'FoxAppy',
-      'exp_1_role': 'Ingeniero de Software, Mobile (Flutter)',
-      'exp_1_date': 'Noviembre 2024 - Actualidad',
-      'exp_1_company': 'FoxAppy',
-      'exp_1_desc': 'Implementé una arquitectura de seguridad a escala empresarial integrando herramientas SAST, procesos de Mobile Hardening y Cloud Security para reducir vulnerabilidades en todo el SDLC.\n\nDiseñé y lideré el desarrollo de una innovadora solución AR desde cero usando Flutter, permitiendo la visualización de productos en tiempo real a través de fotografía de entornos.\n\nGestioné el ciclo de vida completo de más de 100 aplicaciones en Google Play y App Store, optimizando los pipelines de despliegue para garantizar consistencia y confiabilidad a escala.',
+      'exp_1_role': 'Desarrollador Móvil Flutter',
+      'exp_1_date': 'Nov 2024 - Presente',
+      'exp_1_company': '@ FoxAppy',
+      'exp_1_desc': 'Desarrollo central de aplicaciones móviles basadas en suscripción para el ecosistema de comercio electrónico.\nGarantizando rendimiento, fluidez y escalabilidad del código base en Dart.',
       
-      'exp_2_menu': 'Upside Inteligencia Web',
-      'exp_2_role': 'Desarrollador Front-end Semi-Senior',
-      'exp_2_date': 'Agosto 2024 - Enero 2026',
-      'exp_2_company': 'Upside Inteligência Web',
-      'exp_2_desc': 'Desarrollé y renové interfaces responsivas para sitios web de clientes usando WordPress, HTML5, CSS3 y JavaScript, mejorando la experiencia del usuario a través de diseños intuitivos y animaciones modernas.',
+      'exp_2_menu': 'Upside',
+      'exp_2_role': 'Desarrollador Front-end',
+      'exp_2_date': 'Ago 2024 - Ene 2026',
+      'exp_2_company': '@ Upside Inteligencia Web',
+      'exp_2_desc': 'Creación de interfaces web interactivas y responsivas utilizando tecnologías modernas.\nOptimización del rendimiento web e integración con APIs.',
       
       'exp_3_menu': 'CHA SOCIAL',
-      'exp_3_role': 'Marketing Designer',
-      'exp_3_date': 'Marzo 2024 - Octubre 2024',
-      'exp_3_company': 'CHA SOCIAL',
-      'exp_3_desc': 'Desarrollé un alto volumen de creatividades publicitarias (estáticas y en video) como miembro clave del equipo de performance marketing, generando leads calificados para un portafolio diverso de clientes.\n\nDiseñé y construí landing pages de alta conversión para lanzamientos de productos y cursos, optimizando el viaje del usuario a través de CTAs claros para maximizar las tasas de conversión.',
+      'exp_3_role': 'Marketing Design',
+      'exp_3_date': 'Mar 2024 - Oct 2024',
+      'exp_3_company': '@ CHA SOCIAL',
+      'exp_3_desc': 'Producción de piezas visuales para campañas de marketing digital y redes sociales.',
       
       'exp_4_menu': 'Agência Kottler',
-      'exp_4_role': 'Brand & Digital Designer',
-      'exp_4_date': 'Noviembre 2023 - Marzo 2024',
-      'exp_4_company': 'Agência Kottler',
-      'exp_4_desc': 'Desarrollé sistemas completos de identidad visual y de marca para clientes clave, creando campañas de marketing cohesivas que abarcaron canales digitales e impresos de forma integrada.',
+      'exp_4_role': 'Brand & Digital Design',
+      'exp_4_date': 'Nov 2023 - Mar 2024',
+      'exp_4_company': '@ Agência Kottler',
+      'exp_4_desc': 'Desarrollo de identidad visual y diseño digital centrado en la presencia online de marcas.',
 
-      // Seção 6: Projetos
-      'proj_title': 'Proyectos',
+      'proj_title': 'Iniciativas y Proyectos',
       'proj_subtitle': '*Desliza hacia los lados para ver los proyectos*',
       
-      'proj_1_title': 'Mi Portafolio',
-      'proj_1_desc': 'Mi portafolio personal desarrollado con Flutter Web. El proyecto cuenta con internacionalización dinámica (PT, EN, ES), diseño responsivo avanzado y una interfaz moderna enfocada en UI/UX.',
-      'proj_1_techs': 'React • TypeScript',
+      // NOVOS PROJETOS - ES
+      'proj_1_title': 'Portafolio Web',
+      'proj_1_desc': 'Mi portafolio personal interactivo desarrollado desde cero. Diseño responsivo componentizado usando Flutter Web y Dart.',
+      'proj_1_techs': 'Flutter • Dart • Web',
       
-      'proj_2_title': 'Sistema de reservas de hotel',
-      'proj_2_desc': 'Plataforma de reservas de hotel multipágina que utiliza Bootstrap 5 y jQuery. Se centra en la arquitectura CSS modular y la adaptabilidad a diferentes dispositivos.',
-      'proj_2_techs': 'HTML5 • CSS3 • Javascript',
+      'proj_2_title': 'Security Audit Case',
+      'proj_2_desc': 'Estudio de caso en auditoría de seguridad en aplicaciones Flutter. Mapeo práctico de vulnerabilidades e implementación de ingeniería de defensa.',
+      'proj_2_techs': 'AppSec • Dart • Security',
       
-      'proj_3_title': 'Plataforma de reparto de alimentos',
-      'proj_3_desc': 'Plataforma de pedidos en línea desarrollada con React y TS. Se centra en la gestión del estado, filtros dinámicos y una experiencia optimizada para dispositivos móviles.',
-      'proj_3_techs': 'React • Typescript • Styled Components',
+      'proj_3_title': 'Food Commerce',
+      'proj_3_desc': 'Plataforma de pedidos en línea desarrollada con React y TS. Se centra en la gestión del estado, filtros dinámicos y experiencia mobile.',
+      'proj_3_techs': 'React • Typescript',
       
       'proj_btn_github': 'Github',
       'proj_btn_deploy': 'Deploy',
+      
+      'stack_title': 'Habilidades & Stack',
+
+      'contact_fname': 'Nombre',
+      'contact_lname': 'Apellido',
+      'contact_email': 'Correo',
+      'contact_phone': 'Teléfono',
+      'contact_service': 'Seleccione un servicio...',
+      'contact_msg': 'Su mensaje o detalles del proyecto...',
     }
   };
 
-  // Função para buscar o texto certo baseado no idioma atual
   static String get(String key) {
     return _texts[appLanguage.value]?[key] ?? key;
   }

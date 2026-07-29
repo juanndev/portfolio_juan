@@ -1,139 +1,219 @@
+import 'dart:ui';
+import 'dart:convert';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:seo/seo.dart';
+import 'package:portfolio_juan/core/theme.dart';
 
-class FooterSection extends StatelessWidget {
+class FooterSection extends StatefulWidget {
   const FooterSection({super.key});
 
-  Future<void> _launchContact() async {
-    final Uri url = Uri.parse('mailto:contatojuanndev@gmail.com'); 
-    if (!await launchUrl(url)) {
-      throw Exception('Não foi possível abrir o link de contato');
+  @override
+  State<FooterSection> createState() => _FooterSectionState();
+}
+
+class _FooterSectionState extends State<FooterSection> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _msgController = TextEditingController();
+  String? _selectedService;
+  bool _isSending = false;
+
+  void _submitForm() {
+    if (_nameController.text.isEmpty || _emailController.text.isEmpty || _msgController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preencha os campos obrigatórios.')));
+      return;
     }
+
+    setState(() => _isSending = true);
+
+    final req = html.HttpRequest();
+    req.open('POST', 'https://formsubmit.co/contatojuanndev@gmail.com');
+    req.setRequestHeader('Accept', 'application/json');
+    req.setRequestHeader('Content-Type', 'application/json');
+
+    req.onLoadEnd.listen((e) {
+      setState(() => _isSending = false);
+      if (req.status == 200) {
+        _nameController.clear();
+        _lastNameController.clear();
+        _emailController.clear();
+        _phoneController.clear();
+        _msgController.clear();
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Mensagem enviada com sucesso!')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao enviar mensagem.')));
+      }
+    });
+
+    req.send(jsonEncode({
+      "_captcha": "false",
+      "_template": "basic",
+      "Nome": _nameController.text,
+      "Sobrenome": _lastNameController.text,
+      "Email": _emailController.text,
+      "Telefone": _phoneController.text,
+      "Servico_Desejado": _selectedService ?? "Não especificado",
+      "Mensagem": _msgController.text,
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isMobile = screenWidth < 600;
+
     return Column(
       children: [
         Container(
-          width: double.infinity,
-          color: const Color(0xFF03120A),
-          padding: const EdgeInsets.symmetric(vertical: 120, horizontal: 24),
-          child: Column(
-            children: [
-              Seo.text(
-                text: AppTranslations.get('footer_cta'),
-                style: TextTagStyle.p,
-                child: Text(
-                  AppTranslations.get('footer_cta'),
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.5,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 48),
-              Seo.link(
-                href: 'mailto:contatojuanndev@gmail.com',
-                anchor: 'Enviar e-mail para Juan Mota',
-                child: _MagneticContactButton(onTap: _launchContact),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          width: double.infinity,
-          color: const Color(0xFF2ECC71),
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
           child: Center(
-            child: Text(
-              'Copyright © 2026 juanndev.com. Todos os direitos reservados.',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
-                color: Colors.black, 
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 1000),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text('06. ', style: GoogleFonts.firaCode(fontSize: isMobile ? 20 : 24, color: AppTheme.neonCyan)),
+                      Flexible(
+                        child: Text(
+                          AppTranslations.get('footer_cta') != 'footer_cta' 
+                              ? AppTranslations.get('footer_cta') 
+                              : 'Vamos Conversar?',
+                          style: GoogleFonts.inter(fontSize: isMobile ? 22 : 28, fontWeight: FontWeight.w700, color: AppTheme.textMain),
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      Expanded(child: Container(height: 1, color: AppTheme.glassBorder)),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(40),
+                        decoration: BoxDecoration(
+                          color: AppTheme.glassBg,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: AppTheme.glassBorder),
+                        ),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            bool formIsMobile = constraints.maxWidth < 600;
+                            return Column(
+                              children: [
+                                if (formIsMobile) ...[
+                                  _buildTextField(_nameController, AppTranslations.get('contact_fname')),
+                                  const SizedBox(height: 20),
+                                  _buildTextField(_lastNameController, AppTranslations.get('contact_lname')),
+                                  const SizedBox(height: 20),
+                                  _buildTextField(_emailController, AppTranslations.get('contact_email')),
+                                  const SizedBox(height: 20),
+                                  _buildTextField(_phoneController, AppTranslations.get('contact_phone')),
+                                ] else ...[
+                                  Row(
+                                    children: [
+                                      Expanded(child: _buildTextField(_nameController, AppTranslations.get('contact_fname'))),
+                                      const SizedBox(width: 20),
+                                      Expanded(child: _buildTextField(_lastNameController, AppTranslations.get('contact_lname'))),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: [
+                                      Expanded(child: _buildTextField(_emailController, AppTranslations.get('contact_email'))),
+                                      const SizedBox(width: 20),
+                                      Expanded(child: _buildTextField(_phoneController, AppTranslations.get('contact_phone'))),
+                                    ],
+                                  ),
+                                ],
+                                const SizedBox(height: 20),
+                                _buildDropdown(),
+                                const SizedBox(height: 20),
+                                _buildTextField(_msgController, AppTranslations.get('contact_msg'), maxLines: 5),
+                                const SizedBox(height: 30),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    onPressed: _isSending ? null : _submitForm,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppTheme.textMain,
+                                      foregroundColor: AppTheme.bgDark,
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                                    ),
+                                    child: Text(
+                                      _isSending ? 'Enviando...' : AppTranslations.get('footer_btn'),
+                                      style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 40),
+          child: Text(
+            'Designed & Built by Juan\n${AppTranslations.get('footer_copy')}',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.firaCode(color: AppTheme.textMuted, fontSize: 13, height: 1.5),
           ),
         ),
       ],
     );
   }
-}
 
-class _MagneticContactButton extends StatefulWidget {
-  final VoidCallback onTap;
-
-  const _MagneticContactButton({required this.onTap});
-
-  @override
-  State<_MagneticContactButton> createState() => _MagneticContactButtonState();
-}
-
-class _MagneticContactButtonState extends State<_MagneticContactButton> {
-  bool _isHovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic,
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
-          decoration: BoxDecoration(
-            color: _isHovered ? const Color(0xFF2ECC71).withOpacity(0.1) : const Color(0xFF0B1911),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: _isHovered ? const Color(0xFF2ECC71) : Colors.white.withOpacity(0.1),
-            ),
-            boxShadow: _isHovered
-                ? [
-                    BoxShadow(
-                      color: const Color(0xFF2ECC71).withOpacity(0.2),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                    )
-                  ]
-                : [],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                AppTranslations.get('footer_btn'),
-                style: GoogleFonts.inter(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(width: 12),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOutBack,
-                transform: _isHovered ? (Matrix4.identity()..translate(4.0, -4.0)) : Matrix4.identity(),
-                child: const Icon(
-                  Icons.north_east,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-            ],
-          ),
-        ),
+  Widget _buildTextField(TextEditingController controller, String hint, {int maxLines = 1}) {
+    return TextFormField(
+      controller: controller,
+      maxLines: maxLines,
+      style: GoogleFonts.inter(color: AppTheme.textMain),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: GoogleFonts.inter(color: AppTheme.textMuted),
+        filled: true,
+        fillColor: Colors.white.withOpacity(0.03),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: AppTheme.glassBorder)),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: AppTheme.neonCyan)),
       ),
+    );
+  }
+
+  Widget _buildDropdown() {
+    return DropdownButtonFormField<String>(
+      value: _selectedService,
+      dropdownColor: AppTheme.bgDark,
+      style: GoogleFonts.inter(color: AppTheme.textMain),
+      decoration: InputDecoration(
+        hintText: AppTranslations.get('contact_service'),
+        hintStyle: GoogleFonts.inter(color: AppTheme.textMuted),
+        filled: true,
+        fillColor: Colors.white.withOpacity(0.03),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: AppTheme.glassBorder)),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: AppTheme.neonCyan)),
+      ),
+      items: [
+        DropdownMenuItem(value: 'Desenvolvimento Mobile', child: Text(AppTranslations.get('services_app_title') != 'services_app_title' ? AppTranslations.get('services_app_title') : 'Desenvolvimento Mobile')),
+        DropdownMenuItem(value: 'Desenvolvimento Web', child: Text(AppTranslations.get('services_dev_title') != 'services_dev_title' ? AppTranslations.get('services_dev_title') : 'Desenvolvimento Web')),
+        DropdownMenuItem(value: 'Design Gráfico', child: Text(AppTranslations.get('services_ui_title') != 'services_ui_title' ? AppTranslations.get('services_ui_title') : 'Design Gráfico')),
+      ],
+      onChanged: (value) => setState(() => _selectedService = value),
     );
   }
 }

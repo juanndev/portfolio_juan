@@ -1,7 +1,9 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
+import 'package:portfolio_juan/core/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:portfolio_juan/core/hover_card.dart';
 import 'package:seo/seo.dart';
@@ -18,247 +20,127 @@ class ProjectsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isMobile = screenWidth < 600;
+
     final List<Map<String, String>> projects = [
       {
         "title": AppTranslations.get('proj_1_title'),
         "description": AppTranslations.get('proj_1_desc'),
         "techs": AppTranslations.get('proj_1_techs'),
-        "imagePath": "assets/images/portfolio.jpg", 
         "github": "https://github.com/juanndev/portfolio_juan",
       },
       {
         "title": AppTranslations.get('proj_2_title'),
         "description": AppTranslations.get('proj_2_desc'),
         "techs": AppTranslations.get('proj_2_techs'),
-        "imagePath": "assets/images/Reserva de Hoteis.jpg",
-        "github": "https://github.com/juanndev/Reserva-de-Hoteis",
+        // NOVO LINK INSERIDO AQUI
+        "github": "https://github.com/juanndev/flutter-security-audit-case-study", 
       },
       {
         "title": AppTranslations.get('proj_3_title'),
         "description": AppTranslations.get('proj_3_desc'),
         "techs": AppTranslations.get('proj_3_techs'),
-        "imagePath": "assets/images/Plataforma de Delivery.jpg",
-        "github": "https://github.com/juanndev/Plataforma-de-Pedido-Online",
+        "github": "https://github.com/juanndev/Plataforma-de-Pedido-Online", 
       },
     ];
 
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final bool isDesktop = screenWidth > 1100;
-    final double horizontalPadding = isDesktop ? 255.0 : 24.0;
-
     return Container(
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: RadialGradient(
-          center: Alignment.topCenter,
-          radius: 0.8,
-          colors: [
-            Color(0xFF003A19),
-            Color(0xFF03120A),
-          ],
-          stops: [0.0, 1.0],
-        ),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 100),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Seo.text(
-                text: AppTranslations.get('proj_title'),
-                style: TextTagStyle.h2,
-                child: Text(
-                  AppTranslations.get('proj_title'),
-                  style: GoogleFonts.montserrat(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+              Row(
+                children: [
+                  Text(
+                    '03. ',
+                    style: GoogleFonts.firaCode(fontSize: isMobile ? 20 : 24, color: AppTheme.neonCyan),
                   ),
-                ),
-              ),
-              Text(
-                ' .',
-                style: GoogleFonts.montserrat(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF2ECC71),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            AppTranslations.get('proj_subtitle'),
-            style: GoogleFonts.montserrat(
-              fontSize: 16,
-              fontStyle: FontStyle.italic,
-              color: const Color(0xFFE2E8F0),
-            ),
-          ),
-          const SizedBox(height: 60),
-
-          isDesktop
-              ? Padding(
-                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                  child: Center(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: projects.asMap().entries.map((entry) {
-                          int index = entry.key;
-                          var project = entry.value;
-                          return Padding(
-                            padding: EdgeInsets.only(right: index == projects.length - 1 ? 0 : 32.0),
-                            child: _buildProjectCard(project, context),
-                          );
-                        }).toList(),
+                  Flexible(
+                    child: Seo.text(
+                      text: AppTranslations.get('proj_title'),
+                      style: TextTagStyle.h2,
+                      child: Text(
+                        AppTranslations.get('proj_title'),
+                        style: GoogleFonts.inter(
+                          fontSize: isMobile ? 22 : 28,
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.textMain,
+                        ),
                       ),
                     ),
                   ),
-                )
-
-              : SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                  child: Row(
-                    children: projects.map((project) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 32),
-                        child: _buildProjectCard(project, context),
-                      );
-                    }).toList(),
-                  ),
-                ),
-        ],
+                  const SizedBox(width: 15),
+                  Expanded(child: Container(height: 1, color: AppTheme.glassBorder)),
+                ],
+              ),
+              const SizedBox(height: 40),
+              Wrap(
+                spacing: 25,
+                runSpacing: 25,
+                children: projects.map((project) => _buildProjectCard(project, context)).toList(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 
   Widget _buildProjectCard(Map<String, String> project, BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
-    double cardWidth = screenWidth < 500 ? screenWidth * 0.85 : 442.66;
+    double cardWidth = screenWidth < 700 ? screenWidth - 48 : 475;
 
     return HoverCard(
-      child: Container(
-        width: cardWidth,
-        height: 590.25,
-        decoration: BoxDecoration(
-          color: const Color(0xFF05100A),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.white.withOpacity(0.1)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-              child: Container(
-                height: 260,
-                width: double.infinity,
-                color: const Color(0xFF131C18),
-                child: Seo.image(
-                  src: project["imagePath"]!,
-                  alt: project["title"]!,
-                  child: Image.asset(
-                    project["imagePath"]!,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => const Center(
-                      child: Icon(Icons.image, color: Colors.white24, size: 48),
-                    ),
-                  ),
-                ),
-              ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
+          child: Container(
+            width: cardWidth,
+            padding: const EdgeInsets.all(30),
+            decoration: BoxDecoration(
+              color: AppTheme.glassBg,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppTheme.glassBorder),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Seo.text(
-                      text: project["title"]!,
-                      style: TextTagStyle.h3,
-                      child: Text(
-                        project["title"]!,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                    const FaIcon(FontAwesomeIcons.folder, color: AppTheme.neonCyan, size: 40),
+                    // Validação de segurança: Ícone do Github só aparece se houver URL válida
+                    if (project["github"] != null && project["github"]!.isNotEmpty)
+                      InkWell(
+                        onTap: () => _launchUrl(project["github"]!),
+                        child: const FaIcon(FontAwesomeIcons.github, color: AppTheme.textMuted, size: 24),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Expanded(
-                      child: Seo.text(
-                        text: project["description"]!,
-                        style: TextTagStyle.p,
-                        child: Text(
-                          project["description"]!,
-                          style: GoogleFonts.montserrat(
-                            fontSize: 15,
-                            height: 1.5,
-                            color: const Color(0xFFA0AEC0),
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      project["techs"]!,
-                      style: GoogleFonts.montserrat(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Row(
-                      children: [
-                        Seo.link(
-                          href: project["github"]!,
-                          anchor: 'Repositório GitHub do projeto ${project["title"]}',
-                          child: _buildActionButton(
-                            icon: FontAwesomeIcons.github,
-                            label: "Github",
-                            onTap: () => _launchUrl(project["github"]!),
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildActionButton({required IconData icon, required String label, required VoidCallback onTap}) {
-    return InkWell(
-      onTap: onTap,
-      hoverColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: Colors.white, size: 20),
-          const SizedBox(width: 8),
-          Text(
-            label,
-            style: GoogleFonts.montserrat(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
+                const SizedBox(height: 25),
+                Text(
+                  project["title"]!,
+                  style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w600, color: AppTheme.textMain),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  project["description"]!,
+                  style: GoogleFonts.inter(fontSize: 14, color: AppTheme.textMuted, height: 1.5),
+                ),
+                const SizedBox(height: 25),
+                Text(
+                  project["techs"]!.replaceAll(' • ', '   '),
+                  style: GoogleFonts.firaCode(fontSize: 12, color: AppTheme.textMuted),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
