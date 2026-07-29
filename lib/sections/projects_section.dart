@@ -34,7 +34,6 @@ class ProjectsSection extends StatelessWidget {
         "title": AppTranslations.get('proj_2_title'),
         "description": AppTranslations.get('proj_2_desc'),
         "techs": AppTranslations.get('proj_2_techs'),
-        // NOVO LINK INSERIDO AQUI
         "github": "https://github.com/juanndev/flutter-security-audit-case-study", 
       },
       {
@@ -114,7 +113,6 @@ class ProjectsSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const FaIcon(FontAwesomeIcons.folder, color: AppTheme.neonCyan, size: 40),
-                    // Validação de segurança: Ícone do Github só aparece se houver URL válida
                     if (project["github"] != null && project["github"]!.isNotEmpty)
                       InkWell(
                         onTap: () => _launchUrl(project["github"]!),
@@ -123,14 +121,22 @@ class ProjectsSection extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 25),
-                Text(
-                  project["title"]!,
-                  style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w600, color: AppTheme.textMain),
+                Seo.text(
+                  text: project["title"]!,
+                  style: TextTagStyle.h3,
+                  child: Text(
+                    project["title"]!,
+                    style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w600, color: AppTheme.textMain),
+                  ),
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  project["description"]!,
-                  style: GoogleFonts.inter(fontSize: 14, color: AppTheme.textMuted, height: 1.5),
+                Seo.text(
+                  text: project["description"]!,
+                  style: TextTagStyle.p,
+                  child: Text(
+                    project["description"]!,
+                    style: GoogleFonts.inter(fontSize: 14, color: AppTheme.textMuted, height: 1.5),
+                  ),
                 ),
                 const SizedBox(height: 25),
                 Text(

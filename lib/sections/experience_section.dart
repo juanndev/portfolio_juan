@@ -94,7 +94,7 @@ class ExperienceSection extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
         child: Container(
-          width: double.infinity, // Força o card a esticar até os limites da tela
+          width: double.infinity,
           padding: EdgeInsets.all(isMobile ? 25 : 35),
           decoration: BoxDecoration(
             color: AppTheme.glassBg,
@@ -104,15 +104,18 @@ class ExperienceSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // MUDANÇA PRINCIPAL: Uso do Row + Expanded para separar Perfeitamente
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Text(
-                      data["role"]!,
-                      style: GoogleFonts.inter(fontSize: isMobile ? 20 : 22, fontWeight: FontWeight.w600, color: AppTheme.textMain),
+                    child: Seo.text(
+                      text: data["role"]!,
+                      style: TextTagStyle.h3,
+                      child: Text(
+                        data["role"]!,
+                        style: GoogleFonts.inter(fontSize: isMobile ? 20 : 22, fontWeight: FontWeight.w600, color: AppTheme.textMain),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 15),
@@ -135,9 +138,13 @@ class ExperienceSection extends StatelessWidget {
                   children: [
                     Text('▹ ', style: GoogleFonts.inter(color: AppTheme.neonCyan, fontSize: 16)),
                     Expanded(
-                      child: Text(
-                        desc,
-                        style: GoogleFonts.inter(color: AppTheme.textMuted, fontSize: isMobile ? 14 : 15, height: 1.5),
+                      child: Seo.text(
+                        text: desc,
+                        style: TextTagStyle.p,
+                        child: Text(
+                          desc,
+                          style: GoogleFonts.inter(color: AppTheme.textMuted, fontSize: isMobile ? 14 : 15, height: 1.5),
+                        ),
                       ),
                     ),
                   ],

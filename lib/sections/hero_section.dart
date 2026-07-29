@@ -41,12 +41,16 @@ class HeroSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                AppTranslations.get('hero_hello'),
-                style: GoogleFonts.firaCode(
-                  color: AppTheme.neonCyan,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+              Seo.text(
+                text: AppTranslations.get('hero_hello'),
+                style: TextTagStyle.p,
+                child: Text(
+                  AppTranslations.get('hero_hello'),
+                  style: GoogleFonts.firaCode(
+                    color: AppTheme.neonCyan,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ).animate().fadeIn(duration: 800.ms).slideY(begin: 0.5, end: 0),
               const SizedBox(height: 16),
@@ -71,19 +75,22 @@ class HeroSection extends StatelessWidget {
               const SizedBox(height: 32),
               Container(
                 constraints: const BoxConstraints(maxWidth: 650), 
-                child: Text(
-                  AppTranslations.get('hero_desc'),
-                  style: GoogleFonts.inter(
-                    fontSize: descSize,
-                    fontWeight: FontWeight.w400,
-                    color: AppTheme.textMuted,
-                    height: 1.6,
+                child: Seo.text(
+                  text: AppTranslations.get('hero_desc'),
+                  style: TextTagStyle.p,
+                  child: Text(
+                    AppTranslations.get('hero_desc'),
+                    style: GoogleFonts.inter(
+                      fontSize: descSize,
+                      fontWeight: FontWeight.w400,
+                      color: AppTheme.textMuted,
+                      height: 1.6,
+                    ),
                   ),
                 ),
               ).animate().fadeIn(duration: 800.ms, delay: 600.ms),
               const SizedBox(height: 48),
               Wrap(
-                // CORREÇÃO: Aplicação do espaçamento responsivo
                 spacing: actionSpacing,
                 runSpacing: 20,
                 alignment: WrapAlignment.start,
@@ -111,7 +118,6 @@ class HeroSection extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppTheme.textMain,
         foregroundColor: AppTheme.bgDark,
-        // CORREÇÃO: Botão com padding um pouco mais compacto no celular para poupar espaço horizontal
         padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 28, vertical: isMobile ? 16 : 20),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
