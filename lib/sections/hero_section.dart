@@ -1,155 +1,227 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
+import 'package:portfolio_juan/core/theme.dart';
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html; 
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:seo/seo.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Não foi possível abrir o link: $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    
+    double titleSize = screenWidth < 400 ? 48 : (screenWidth < 800 ? 64 : 96);
+    double subtitleSize = screenWidth < 400 ? 18 : (screenWidth < 800 ? 24 : 32);
+    double descSize = screenWidth < 800 ? 16 : 18;
+    double actionSpacing = screenWidth < 450 ? 12 : 24;
+    bool isMobile = screenWidth < 600;
 
-    double titleSize = screenWidth < 400 ? 48 : (screenWidth < 800 ? 64 : 80);
-    double subtitleSize = screenWidth < 400 ? 16 : (screenWidth < 800 ? 20 : 24);
-
-    return SizedBox(
+    return Container(
       width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 140),
-            Seo.text(
-              text: 'Juan Mota',
-              style: TextTagStyle.h1,
-              child: Text(
-                'Juan Mota',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
-                  fontSize: titleSize,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                  letterSpacing: -2,
+      constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.9),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80),
+      child: Center(
+        child: Container(
+          width: double.infinity,
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppTranslations.get('hero_hello'),
+                style: GoogleFonts.firaCode(
+                  color: AppTheme.neonCyan,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
                 ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Seo.text(
-              text: AppTranslations.get('hero_subtitle'),
-              style: TextTagStyle.h2,
-              child: Text(
-                AppTranslations.get('hero_subtitle'),
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
-                  fontSize: subtitleSize,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xFFE2E8F0),
+              ).animate().fadeIn(duration: 800.ms).slideY(begin: 0.5, end: 0),
+              const SizedBox(height: 16),
+              Seo.text(
+                text: 'Juan Mota',
+                style: TextTagStyle.h1,
+                child: Text(
+                  'Juan Mota', 
+                  style: GoogleFonts.inter(
+                    fontSize: titleSize,
+                    fontWeight: FontWeight.w800, 
+                    letterSpacing: -2.5, 
+                    color: AppTheme.textMain,
+                    height: 1.1,
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 40),
-            _buildDownloadButton(),
-            const SizedBox(height: 80),
-            Text(
-              AppTranslations.get('hero_exp'),
-              style: GoogleFonts.inter(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFFA0AEC0),
-              ),
-            ),
-            const SizedBox(height: 24),
-            _buildTechStackIcons(),
-            const SizedBox(height: 60),
-          ],
+              ).animate().fadeIn(duration: 800.ms, delay: 200.ms).slideY(begin: 0.5, end: 0),
+              const SizedBox(height: 12),
+              
+              _TypewriterText(fontSize: subtitleSize),
+              
+              const SizedBox(height: 32),
+              Container(
+                constraints: const BoxConstraints(maxWidth: 650), 
+                child: Text(
+                  AppTranslations.get('hero_desc'),
+                  style: GoogleFonts.inter(
+                    fontSize: descSize,
+                    fontWeight: FontWeight.w400,
+                    color: AppTheme.textMuted,
+                    height: 1.6,
+                  ),
+                ),
+              ).animate().fadeIn(duration: 800.ms, delay: 600.ms),
+              const SizedBox(height: 48),
+              Wrap(
+                // CORREÇÃO: Aplicação do espaçamento responsivo
+                spacing: actionSpacing,
+                runSpacing: 20,
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  _buildPrimaryButton(isMobile),
+                  _buildSocialIcon(FontAwesomeIcons.github, 'https://github.com/juanndev'),
+                  _buildSocialIcon(FontAwesomeIcons.linkedinIn, 'https://www.linkedin.com/in/juanndev/'),
+                  _buildSocialIcon(FontAwesomeIcons.instagram, 'https://www.instagram.com/juann.dev/'),
+                  _buildSocialIcon(FontAwesomeIcons.youtube, 'https://www.youtube.com/@JuanAl%C3%A9mdaTela'),
+                ],
+              ).animate().fadeIn(duration: 800.ms, delay: 800.ms),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildDownloadButton() {
-    return OutlinedButton(
+  Widget _buildPrimaryButton(bool isMobile) {
+    return ElevatedButton(
       onPressed: () {
-        final String currentLang = appLanguage.value;
-
-        String filePath;
-        String fileName;
-
-        switch (currentLang) {
-          case 'en':
-            filePath = 'assets/files/resume_en.pdf';
-            fileName = 'Juan_Mota_Resume.pdf';
-            break;
-          case 'es':
-            filePath = 'assets/files/curriculum_es.pdf';
-            fileName = 'Juan_Mota_Curriculum.pdf';
-            break;
-          case 'pt':
-          default:
-            filePath = 'assets/files/curriculo_pt.pdf';
-            fileName = 'Juan_Mota_Curriculo.pdf';
-            break;
-        }
-
-        html.AnchorElement(href: filePath)
-          ..setAttribute('download', fileName)
-          ..click();
+        // Lógica de download
       },
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.white,
-        side: const BorderSide(color: Color(0xFF2ECC71)),
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppTheme.textMain,
+        foregroundColor: AppTheme.bgDark,
+        // CORREÇÃO: Botão com padding um pouco mais compacto no celular para poupar espaço horizontal
+        padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 28, vertical: isMobile ? 16 : 20),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(6),
         ),
+        elevation: 0,
       ),
       child: Text(
         AppTranslations.get('hero_btn'),
         style: GoogleFonts.inter(
           fontSize: 15,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
         ),
       ),
-    )
-        .animate(onPlay: (controller) => controller.repeat(reverse: true))
-        .scale(begin: const Offset(1, 1), end: const Offset(1.03, 1.03), duration: 1200.ms, curve: Curves.easeInOut)
-        .animate(onPlay: (controller) => controller.repeat())
-        .shimmer(duration: 1500.ms, delay: 2.seconds, color: const Color(0xFF2ECC71));
+    );
   }
 
-  Widget _buildTechStackIcons() {
-    final icons = [
-      'assets/icons/javascriptIcon.svg',
-      'assets/icons/flutterIcon.svg',
-      'assets/icons/dartIcon.svg',
-      'assets/icons/typescriptIcon.svg',
-      'assets/icons/sassIcon.svg',
-      'assets/icons/cursorIcon.svg',
-      'assets/icons/figmaIcon.svg',
+  Widget _buildSocialIcon(IconData icon, String url) {
+    return InkWell(
+      onTap: () => _launchUrl(url),
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      child: FaIcon(
+        icon,
+        color: AppTheme.textMuted,
+        size: 24,
+      ),
+    );
+  }
+}
+
+class _TypewriterText extends StatefulWidget {
+  final double fontSize;
+
+  const _TypewriterText({required this.fontSize});
+
+  @override
+  State<_TypewriterText> createState() => _TypewriterTextState();
+}
+
+class _TypewriterTextState extends State<_TypewriterText> {
+  String _displayedText = "";
+  int _textIndex = 0;
+  int _charIndex = 0;
+  bool _isDeleting = false;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _type();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _type() {
+    final texts = [
+      AppTranslations.get('typewriter_1'),
+      AppTranslations.get('typewriter_2'),
+      AppTranslations.get('typewriter_3'),
     ];
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(icons.length, (index) {
-        return Padding(
-          padding: EdgeInsets.only(right: index == icons.length - 1 ? 0 : 24.0),
-          child: SvgPicture.asset(icons[index], height: 24)
-              .animate(onPlay: (controller) => controller.repeat(reverse: true))
-              .moveY(
-                begin: -5,
-                end: 5,
-                duration: 1500.ms,
-                curve: Curves.easeInOutSine,
-                delay: (index * 200).ms,
-              ),
-        );
-      }),
-    );
+    if (_textIndex >= texts.length) _textIndex = 0;
+    String currentFullText = texts[_textIndex];
+
+    if (!mounted) return;
+
+    setState(() {
+      if (_isDeleting) {
+        _displayedText = currentFullText.substring(0, _charIndex);
+        _charIndex--;
+      } else {
+        _displayedText = currentFullText.substring(0, _charIndex);
+        _charIndex++;
+      }
+    });
+
+    int speed = _isDeleting ? 40 : 80;
+
+    if (!_isDeleting && _charIndex > currentFullText.length) {
+      speed = 2500; 
+      _isDeleting = true;
+      _charIndex = currentFullText.length;
+    } else if (_isDeleting && _charIndex < 0) {
+      _isDeleting = false;
+      _textIndex++;
+      _charIndex = 0;
+      speed = 500; 
+    }
+
+    _timer = Timer(Duration(milliseconds: speed), _type);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Seo.text(
+      text: _displayedText,
+      style: TextTagStyle.h2,
+      child: Text(
+        '> $_displayedText',
+        style: GoogleFonts.firaCode(
+          fontSize: widget.fontSize,
+          fontWeight: FontWeight.w600,
+          color: AppTheme.textMuted,
+        ),
+      ),
+    ).animate().fadeIn(duration: 800.ms, delay: 400.ms);
   }
 }

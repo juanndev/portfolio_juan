@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_juan/core/theme.dart';
 
 class HoverCard extends StatefulWidget {
   final Widget child;
@@ -26,9 +27,7 @@ class _HoverCardState extends State<HoverCard> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              // A OTIMIZAÇÃO: Animamos apenas a opacidade do verde (de 0% para 15%)
-              color: const Color(0xFF2ECC71).withOpacity(_isHovered ? 0.15 : 0.0),
-              // Mantemos o raio e o eixo fixos para não travar o WebGL!
+              color: AppTheme.neonCyan.withOpacity(_isHovered ? 0.15 : 0.0),
               blurRadius: 30,
               offset: const Offset(0, 15),
             )
