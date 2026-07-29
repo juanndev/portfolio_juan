@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_juan/core/app_translations.dart';
 import 'package:portfolio_juan/core/theme.dart';
+import 'package:seo/seo.dart';
 
 class FooterSection extends StatefulWidget {
   const FooterSection({super.key});
@@ -81,11 +82,15 @@ class _FooterSectionState extends State<FooterSection> {
                     children: [
                       Text('06. ', style: GoogleFonts.firaCode(fontSize: isMobile ? 20 : 24, color: AppTheme.neonCyan)),
                       Flexible(
-                        child: Text(
-                          AppTranslations.get('footer_cta') != 'footer_cta' 
-                              ? AppTranslations.get('footer_cta') 
-                              : 'Vamos Conversar?',
-                          style: GoogleFonts.inter(fontSize: isMobile ? 22 : 28, fontWeight: FontWeight.w700, color: AppTheme.textMain),
+                        child: Seo.text(
+                          text: AppTranslations.get('footer_cta'),
+                          style: TextTagStyle.h2,
+                          child: Text(
+                            AppTranslations.get('footer_cta') != 'footer_cta' 
+                                ? AppTranslations.get('footer_cta') 
+                                : 'Vamos Conversar?',
+                            style: GoogleFonts.inter(fontSize: isMobile ? 22 : 28, fontWeight: FontWeight.w700, color: AppTheme.textMain),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 15),
@@ -169,10 +174,14 @@ class _FooterSectionState extends State<FooterSection> {
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 40),
-          child: Text(
-            'Designed & Built by Juan\n${AppTranslations.get('footer_copy')}',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.firaCode(color: AppTheme.textMuted, fontSize: 13, height: 1.5),
+          child: Seo.text(
+            text: 'Designed & Built by Juan - ${AppTranslations.get('footer_copy')}',
+            style: TextTagStyle.p,
+            child: Text(
+              'Designed & Built by Juan\n${AppTranslations.get('footer_copy')}',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.firaCode(color: AppTheme.textMuted, fontSize: 13, height: 1.5),
+            ),
           ),
         ),
       ],
