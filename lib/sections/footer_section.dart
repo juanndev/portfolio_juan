@@ -1,9 +1,8 @@
 import 'dart:ui';
 import 'dart:convert';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:portfolio_juan/core/app_translations.dart';
 import 'package:portfolio_juan/core/theme.dart';
 import 'package:seo/seo.dart';
@@ -24,7 +23,7 @@ class _FooterSectionState extends State<FooterSection> {
   String? _selectedService;
   bool _isSending = false;
 
-  void _submitForm() {
+  Future<void> _submitForm() async {
     if (_nameController.text.isEmpty || _emailController.text.isEmpty || _msgController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preencha os campos obrigatórios.')));
       return;
@@ -32,35 +31,56 @@ class _FooterSectionState extends State<FooterSection> {
 
     setState(() => _isSending = true);
 
-    final req = html.HttpRequest();
-    req.open('POST', 'https://formsubmit.co/contatojuanndev@gmail.com');
-    req.setRequestHeader('Accept', 'application/json');
-    req.setRequestHeader('Content-Type', 'application/json');
+    try {
+      final response = await http.post(
+        Uri.parse('https://formsubmit.co/contatojuanndev@gmail.com'),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "_captcha": "false",
+          "_template": "basic",
+          "Nome": _nameController.text,
+          "Sobrenome": _lastNameController.text,
+          "Email": _emailController.text,
+          "Telefone": _phoneController.text,
+          "Servico_Desejado": _selectedService ?? "Não especificado",
+          "Mensagem": _msgController.text,
+        }),
+      );
 
-    req.onLoadEnd.listen((e) {
-      setState(() => _isSending = false);
-      if (req.status == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         _nameController.clear();
         _lastNameController.clear();
         _emailController.clear();
         _phoneController.clear();
         _msgController.clear();
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Mensagem enviada com sucesso!')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Mensagem enviada com sucesso!'), backgroundColor: AppTheme.neonCyan),
+        );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao enviar mensagem.')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Erro ao enviar mensagem.'), backgroundColor: Colors.redAccent),
+        );
       }
-    });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Erro de conexão ao enviar mensagem.'), backgroundColor: Colors.redAccent),
+      );
+    } finally {
+      setState(() => _isSending = false);
+    }
+  }
 
-    req.send(jsonEncode({
-      "_captcha": "false",
-      "_template": "basic",
-      "Nome": _nameController.text,
-      "Sobrenome": _lastNameController.text,
-      "Email": _emailController.text,
-      "Telefone": _phoneController.text,
-      "Servico_Desejado": _selectedService ?? "Não especificado",
-      "Mensagem": _msgController.text,
-    }));
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _msgController.dispose();
+    super.dispose();
   }
 
   @override
@@ -154,10 +174,12 @@ class _FooterSectionState extends State<FooterSection> {
                                       foregroundColor: AppTheme.bgDark,
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
                                     ),
-                                    child: Text(
-                                      _isSending ? 'Enviando...' : AppTranslations.get('footer_btn'),
-                                      style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600),
-                                    ),
+                                    child: _isSending 
+                                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: AppTheme.bgDark, strokeWidth: 2))
+                                        : Text(
+                                            AppTranslations.get('footer_btn'),
+                                            style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600),
+                                          ),
                                   ),
                                 ),
                               ],
