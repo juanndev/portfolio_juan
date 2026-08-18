@@ -1,0 +1,22 @@
+# Contexto Profissional: Juan Mota (juanndev)
+
+## Visão Geral
+Juan Mota é um Engenheiro de Software Mobile e Full Stack, focando em aplicações escaláveis e multiplataforma com princípios avançados de Segurança Cibernética (Security by Design). Atua no desenvolvimento de software unindo arquitetura robusta com interfaces de alta performance.
+
+## Formação Acadêmica
+- Graduação em Análise e Desenvolvimento de Sistemas (Universidade Cruzeiro do Sul).
+- Pós-graduação em Cybersecurity (Wyden), com foco em metodologias AppSec e Red Team.
+
+## Tecnologias e Especialidades
+- Linguagens: Dart, JavaScript.
+- Frameworks: Flutter (Mobile e WebAssembly - WASM).
+- Foco: Desenvolvimento Mobile (iOS/Android), AppSec, Penetration Testing, Glassmorphism, Micro-SaaS.
+
+## Atuação Profissional e Projetos
+- Desenvolvedor de Software Mobile na FoxAppy.
+- Desenvolvedor e idealizador do QuestLife (aplicação Micro-SaaS focada em produtividade).
+- Criador de conteúdo de tecnologia no YouTube ("Juan: Além da Tela") e no Instagram (@juann.dev).
+
+## Contato e Links
+- E-mail Profissional: contato@juanndev.com
+- Website: https://juanndev.com
